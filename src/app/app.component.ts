@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { SharedAuthService } from './services/shared-auth.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+   name = 'Angular'; 
+   constructor(
+    private sharedAuthService: SharedAuthService,
+    private router: Router
+  ){}
 }
+
+
+
+
+
+
+

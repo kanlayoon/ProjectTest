@@ -1,0 +1,36 @@
+.example-container {
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+  }
+  
+  .example-header {
+    min-height: 64px;
+    padding: 8px 24px 0;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  .mat-table {
+    overflow: auto;
+    max-height: 500px;
+  }
+  .selectCP {
+    width: 20%;
+  }
+  mat-card {
+    margin: 3%;
+    
+}
+h1 { color: #111;
+  font-family: 'Helvetica Neue', sans-serif; 
+  font-size: 30px; 
+  font-weight: bold; 
+  letter-spacing: -1px; 
+  line-height: 2; 
+  text-align: center;
+ background-color: #c9c9ff;
+}

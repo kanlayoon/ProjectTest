@@ -1,0 +1,93 @@
+<app-header></app-header>
+
+<body>
+  <mat-card>
+    <h1>การสั่งจ่ายสินค้า</h1>
+  
+    <mat-form-field>
+        <mat-select placeholder="สาขา">
+          <mat-option *ngFor="let branch of branchs" [value]="branch.value">
+            {{ branch.viewValue }}
+          </mat-option>
+        </mat-select>
+        </mat-form-field>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <mat-form-field>
+          <mat-select placeholder="หมวดการค้นหา">
+            <mat-option *ngFor="let category of Catproduct" [value]="category.value">
+              {{ category.viewValue }}
+            </mat-option>
+          </mat-select>
+          </mat-form-field>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+    <!-- <div class="example-header"> -->
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+    <!-- </div> -->
+    <i class="material-icons col-3">search</i>
+    <div class="example-container mat-elevation-z8">
+
+      <mat-table [dataSource]="dataSource" matSort>
+
+        <!-- ID Column -->
+        <ng-container matColumnDef="Product_Id">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> รหัสสินค้า </mat-header-cell>
+          <mat-cell *matCellDef="let product"> {{product.Product_Id}} </mat-cell>
+        </ng-container>
+
+     
+
+        <!-- Progress Column -->
+        <ng-container matColumnDef="Product_Name">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> ชื่อสินค้า </mat-header-cell>
+          <mat-cell *matCellDef="let product"> {{product.Product_Name}} </mat-cell>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="ProductType_Name">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> ประเภทสินค้า </mat-header-cell>
+          <mat-cell *matCellDef="let product"> {{product.ProductType_Name}} </mat-cell>
+        </ng-container>
+
+        <!-- Color Column -->
+        <ng-container matColumnDef="BranchProduct_EXP">
+          <mat-header-cell *matHeaderCellDef mat-sort-header   > วันหมดอายุ </mat-header-cell>
+          <mat-cell *matCellDef="let product"  > {{product.BranchProduct_EXP | date:'dd/MM/yyyy' }} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Product_Des">
+          <mat-header-cell *matHeaderCellDef mat-sort-header > คำอธิบาย </mat-header-cell>
+          <mat-cell *matCellDef="let product"> {{product.Product_Des}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Product_Instruction">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> วิธีใช้ </mat-header-cell>
+          <mat-cell *matCellDef="let product"> {{product.Product_Instruction}} </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="BranchProduct_Amount">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> จำนวน </mat-header-cell>
+          <mat-cell *matCellDef="let product"> <div class="ui input" style="width:70%">
+            <input type="text"  placeholder="จำนวน" >
+          </div> </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="sss">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>  </mat-header-cell>
+          <mat-cell *matCellDef="let row">  <button class="ui inverted violet  button">สั่งจ่าย</button> </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"
+        (click)="onRowClicked(row)">
+        </mat-row>
+      </mat-table>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    </div>
+
+
+  </mat-card>
+</body>

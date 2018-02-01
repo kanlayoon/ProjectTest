@@ -1,0 +1,19 @@
+.example-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .example-container > * {
+    width: 50%;
+    
+  }
+  .mat-card {
+  
+    width :100%;
+    align:center;
+    
+}
+.mat-form-field {
+   width: 50%;
+   align:center;
+}

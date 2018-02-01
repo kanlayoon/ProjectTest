@@ -1,0 +1,52 @@
+<app-header></app-header>
+ <h1 style="text-align:center">เพิ่มข้อมูลสินค้า</h1>
+
+<body>
+    <mat-card>
+      
+        <div class="example-container" style="text-align:center">
+            <mat-form-field>
+              <input matInput placeholder="รหัสสินค้า">
+            </mat-form-field>
+          <br>
+          <mat-form-field>
+              <input matInput placeholder="ชื่อสินค้า">
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+              <mat-select placeholder="ประเภทสินค้า">
+                <mat-option value="option">ประเภทสินค้า</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+              
+            
+              <br>
+            <mat-form-field>
+                <textarea matInput placeholder="คำอธิบาย"></textarea>
+              </mat-form-field>
+            <br>
+            <mat-form-field>
+                <textarea matInput placeholder="วิธีใช้"></textarea>
+              </mat-form-field>
+            <br>
+            <mat-form-field>
+                <input matInput placeholder="จำนวน">
+              </mat-form-field>
+          </div>
+          <br>
+          <div class="example-container">
+      <mat-form-field>
+        <input matInput placeholder="Enter your email" [formControl]="email" required>
+        
+      </mat-form-field>
+    </div>
+    
+    </mat-card>
+    
+    </body>

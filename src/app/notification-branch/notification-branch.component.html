@@ -1,0 +1,140 @@
+<app-header></app-header>
+<body>
+    <mat-card>
+     <h1>ตั้งค่าการแจ้งเตือน</h1>
+<mat-tab-group>
+    <mat-tab label="การตั้งค่าแจ้งเตือนสินค้าในคลังใกล้หมด">
+        
+      
+      <div class="example-header">
+          <mat-form-field>
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+          </mat-form-field>
+        </div>
+        
+        <div class="example-container mat-elevation-z8">
+        
+          <mat-table [dataSource]="dataSource" matSort>
+        
+            
+
+            <!-- ID Column -->
+            <ng-container matColumnDef="id">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> รหัสสินค้า </mat-header-cell>
+              <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
+            </ng-container>
+        
+        
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> ชื่อสินค้า </mat-header-cell>
+              <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
+            </ng-container>
+
+             <!-- Progress Column -->
+             <ng-container matColumnDef="noti1">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> การเตือนระดับที่ 1 </mat-header-cell>
+              <mat-cell *matCellDef="let row"> <div class="ui input" style="width:70%">
+                <input type="text"  placeholder="1" >
+              </div> </mat-cell>
+            </ng-container>
+        
+            <!-- Color Column -->
+            <ng-container matColumnDef="noti2">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> การเตือนระดับที่ 2 </mat-header-cell>
+              <mat-cell *matCellDef="let row"> <div class="ui input" style="width:70%">
+                <input type="text"  placeholder="2" >
+              </div> </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="noti3">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> การเตือนระดับที่ 3 </mat-header-cell>
+              <mat-cell *matCellDef="let row">  <div class="ui input" style="width:70%">
+                <input type="text"  placeholder="3" >
+              </div> </mat-cell>
+            </ng-container>
+
+
+            <ng-container matColumnDef="button">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>   </mat-header-cell>
+              <mat-cell *matCellDef="let row">  <button class="ui inverted green button">ยืนยัน</button> &nbsp; <button class="ui inverted red button">ยกเลิก</button> </mat-cell>
+            </ng-container>
+        
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;">
+            </mat-row>
+          </mat-table>
+        
+          <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+        </div>
+        
+          
+    </mat-tab>
+    <mat-tab label="การตั้งค่าแจ้งเตือนสินค้าใกล้หมดอายุ">
+      
+          
+          <div class="example-header">
+              <mat-form-field>
+                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+              </mat-form-field>
+            </div>
+            
+            <div class="example-container mat-elevation-z8">
+            
+              <mat-table [dataSource]="dataSource" matSort>
+            
+               <!-- ID Column -->
+            <ng-container matColumnDef="id">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> รหัสสินค้า </mat-header-cell>
+              <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
+            </ng-container>
+        
+        
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> ชื่อสินค้า </mat-header-cell>
+              <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
+            </ng-container>
+
+             <!-- Progress Column -->
+             <ng-container matColumnDef="noti1">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> การเตือนระดับที่ 1 </mat-header-cell>
+              <mat-cell *matCellDef="let row"> <div class="ui input" style="width:70%">
+                <input type="text"  placeholder="1" >
+              </div> </mat-cell>
+            </ng-container>
+        
+            <!-- Color Column -->
+            <ng-container matColumnDef="noti2">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> การเตือนระดับที่ 2 </mat-header-cell>
+              <mat-cell *matCellDef="let row"> <div class="ui input" style="width:70%">
+                <input type="text"  placeholder="2" >
+              </div> </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="noti3">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> การเตือนระดับที่ 3 </mat-header-cell>
+              <mat-cell *matCellDef="let row">  <div class="ui input" style="width:70%">
+                <input type="text"  placeholder="3" >
+              </div> </mat-cell>
+            </ng-container>
+
+
+            <ng-container matColumnDef="button">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>   </mat-header-cell>
+              <mat-cell *matCellDef="let row">  <button class="ui inverted green button">ยืนยัน</button> &nbsp; <button class="ui inverted red button">ยกเลิก</button> </mat-cell>
+            </ng-container>
+            
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;">
+                </mat-row>
+              </mat-table>
+            
+              <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+            </div>
+            
+              
+    </mat-tab>
+</mat-tab-group>
+</mat-card>
+</body>

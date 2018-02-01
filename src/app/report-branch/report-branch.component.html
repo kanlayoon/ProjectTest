@@ -1,0 +1,38 @@
+<app-header-branch></app-header-branch>
+<body>
+    <mat-card>
+    <h1>ออกกรายงาน</h1>
+    <mat-form-field>
+        <mat-select placeholder="รายงานการสั่งจ่าย">
+          <mat-option *ngFor="let food of foods" [value]="food.value">
+            {{ food.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+    ตั้งแต่วันที่ :&nbsp; <mat-form-field>
+        <input matInput [matDatepicker]="picker1" placeholder="Choose a date">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+      &nbsp;
+      ถึงวันที่ :&nbsp; 
+      <mat-form-field>
+          <input matInput [matDatepicker]="picker2" placeholder="Choose a date">
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+        &nbsp; <button class="button button1"><i class="material-icons ">search</i></button>
+        <br>
+        
+          
+          <mat-card>
+
+
+          </mat-card>
+          <button class="button button1">Export</button>
+
+
+    </mat-card>
+
+</body>
