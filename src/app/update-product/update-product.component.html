@@ -1,50 +1,50 @@
 <app-header></app-header>
- <h1 style="text-align:center">แก้ไขข้อมูลสินค้า</h1>
+<h1 style="text-align:center">แก้ไขข้อมูลสินค้า</h1>
 
 <body>
 
-    <mat-card>
-      
-        <div class="example-container" >
-            <mat-form-field>
-              <input matInput placeholder="รหัสสินค้า" id="idp" [(ngModel)]="idp">
-            </mat-form-field>  
-          <br>
-          <mat-form-field>
-              <input matInput placeholder="ชื่อสินค้า" id="name" [(ngModel)]="name">
-            </mat-form-field>
-            <br>
+  <mat-card>
 
-            <mat-form-field>
-         <mat-select placeholder=" ประเภทสินค้า">
-    <mat-option *ngFor="let types of productTypes" [value]="1" >
-      {{ types.ProductType_Name }}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
-<br>
-            <!-- <mat-form-field>
+    <div class="example-container">
+      <mat-form-field>
+        <input matInput placeholder="รหัสสินค้า" type="number" id="idp" [(ngModel)]="idp">
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <input matInput placeholder="ชื่อสินค้า" id="name" [(ngModel)]="name">
+      </mat-form-field>
+      <br>
+
+      <mat-form-field>
+        <mat-select placeholder=" ประเภทสินค้า" [(ngModel)]="typeproduct" name="typeproduct"> 
+          <mat-option *ngFor="let type of productTypes" [value]="type">
+            {{ type.ProductType_Name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <br>
+      <!-- <mat-form-field>
                 <input matInput [matDatepicker]="picker" placeholder="Choose a date" id="p_exp">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
               </mat-form-field>
               <br> -->
-            <mat-form-field>
-                <textarea matInput placeholder="คำอธิบาย" id="des"   [(ngModel)]="des"></textarea>
-              </mat-form-field>
-            <br>
-            <mat-form-field>
-                <textarea matInput placeholder="วิธีใช้"  id="ins"   [(ngModel)]="ins"></textarea>
-              </mat-form-field>
+      <mat-form-field>
+        <textarea matInput placeholder="คำอธิบาย" id="des" [(ngModel)]="des"></textarea>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <textarea matInput placeholder="วิธีใช้" id="ins" [(ngModel)]="ins"></textarea>
+      </mat-form-field>
 
-             
-           
-       
-          </div>
-          
-  <button class="ui inverted orange  button" (click)="save()">Update</button>
 
-    </mat-card>
-   
-    
-    </body>
+
+
+    </div>
+
+    <button class="ui inverted orange  button" (click)="save()">Update</button>
+
+  </mat-card>
+
+
+</body>

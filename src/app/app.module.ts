@@ -6,10 +6,11 @@ import {FormsModule, ReactiveFormsModule,} from '@angular/forms';
 import { HttpModule } from '@angular/http';
 // import {HttpClientModule} from '@angular/common/http';
 import { APP_BASE_HREF } from '@angular/common';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import {MatButtonModule, MatCheckboxModule ,MatToolbarModule,MatTab, MatTabsModule, MatIconModule,
        MatMenuModule,MatCardModule,MatGridListModule
       ,MatOptionModule,MatSelectModule,MatAutocompleteModule,MatInputModule,MatTableModule,
-      MatPaginatorModule,MatDatepickerModule,MatNativeDateModule,MatSort,MatSortModule
+      MatPaginatorModule,MatDatepickerModule,MatNativeDateModule,MatSort,MatSortModule,MatRadioModule,
     
     } from '@angular/material';
 
@@ -38,6 +39,9 @@ import { HeaderBranchComponent } from './header-branch/header-branch.component';
 import { NotificationBranchComponent } from './notification-branch/notification-branch.component';
 import { ReportBranchComponent } from './report-branch/report-branch.component';
 
+import {enableProdMode} from '@angular/core';
+enableProdMode();
+
 // Service
 import { ApiService } from './services/api.service';
 import { ProxyConfigService } from './services/proxy.config.service';
@@ -50,7 +54,8 @@ import { UserService} from './Services/user.service'
 import { ApiUrl } from './services/apiUrl.service';
 import { SupplyService } from './supply/supply.service';
 import {UpdateService} from './update-product/update-product.service'
-
+import { NgModel } from '@angular/forms/src/directives/ng_model';
+import {AddProductTypeService} from './add-product/add-productType.service'
 
 
 
@@ -81,16 +86,15 @@ import {UpdateService} from './update-product/update-product.service'
              MatTableModule,
              MatPaginatorModule,
              MatDatepickerModule,
-            //  MatFormField,
             MatNativeDateModule,
             MatSortModule,
             HttpModule,
+            MatRadioModule,
             
-            
-            
+           
   ],
   
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent,],
   providers: [ ProxyConfigService,
                 ApiService,
                 ProductService,
@@ -101,8 +105,9 @@ import {UpdateService} from './update-product/update-product.service'
                 ProductService,
                 ApiUrl,
                 SupplyService,
-               UpdateService
-    
+               UpdateService,
+               AddProductTypeService,
+   
   ],
 
 

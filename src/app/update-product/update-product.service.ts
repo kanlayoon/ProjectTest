@@ -15,8 +15,10 @@ export class UpdateService {
     this.actionUrl = apiUrl.ApiServer;
   }
   
-  public update = (update_string): Observable<any> => {
-    return this._http.post(this.actionUrl + "/Product/u/" + update_string )
+  public update = (update_string, obj:any): Observable<any> => {
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({ headers: headers });
+    return this._http.put(this.actionUrl + "/Product/update/" + update_string, obj, options )
     .map( (response: Response) => <any>response.json() )
     .do( x => console.log(x));
   }
@@ -27,6 +29,7 @@ export class UpdateService {
   }
 
 }
+
     
 
 

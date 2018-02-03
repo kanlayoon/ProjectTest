@@ -4,9 +4,9 @@ import { MatFormFieldModule, MatError, MatFormField, MatPlaceholder, MatFormFiel
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { ProductService } from '../product/product.service';
 import { Product } from './product.model';
-import { Http, Headers, RequestOptions, Response} from '@angular/http';
+import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { Observable, Subject } from 'rxjs/Rx';
-import {DataSource} from '@angular/cdk/collections';
+import { DataSource } from '@angular/cdk/collections';
 
 export class State {
   constructor(public name: string, public population: string, public flag: string) { }
@@ -20,19 +20,21 @@ export class State {
 })
 export class ProductComponent implements OnInit {
   private productList: Product[];
-  constructor( private productService: ProductService, private _http: Http ) {
-   
+  constructor(private productService: ProductService, private _http: Http) {
+
   }
   public products: any[];
 
-  ngOnInit() {     
-    this.productService.getAll().subscribe( data => this.products = data, 
-     error => console.log(error),
-    () => console.log("Get all product complete"));
+  ngOnInit() {
+    this.productService.getAll().subscribe(data => {
+      this.products = data;
+      console.log(data)
+    },
+      error => console.log(error));
 
   }
 
-  
+
   myControl: FormControl = new FormControl();
   Catproduct = [
     { value: 'steak-0', viewValue: 'รหัสสินค้า' },
@@ -40,15 +42,15 @@ export class ProductComponent implements OnInit {
     { value: 'tacos-2', viewValue: 'ประเภทสินค้า' }
   ];
 
-  
-  displayedColumns = ['Product_Id', 'Product_Name','ProductType_Name','BranchProduct_EXP','Product_Des','Product_Instruction','BranchProduct_Amount','sss'];
+
+  displayedColumns = ['Product_Id', 'Product_Name', 'ProductType_Name', 'BranchProduct_EXP', 'Product_Des', 'Product_Instruction', 'BranchProduct_Amount', 'sss'];
   // dataSource: MatTableDataSource<UserData>;
   dataSource = new ProductDataSource(this.productService);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  
+
   /**
    * Set the paginator and sort after the view init since this component will
    * be able to query its view for the initialized paginator and sort.
@@ -56,7 +58,7 @@ export class ProductComponent implements OnInit {
   ngAfterViewInit() {
     // this.dataSource.paginator = this.paginator;
     // this.dataSource.sort = this.sort;
-    
+
   }
 
   applyFilter(filterValue: string) {
@@ -74,7 +76,7 @@ export class ProductDataSource extends DataSource<any> {
   connect(): Observable<Product[]> {
     return this.productService.getAll();
   }
-  disconnect() {}
+  disconnect() { }
 }
 
 

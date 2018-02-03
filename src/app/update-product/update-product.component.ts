@@ -4,6 +4,7 @@ import { MatFormFieldModule, MatError, MatFormField, MatPlaceholder, MatFormFiel
 import { Router, ActivatedRoute } from '@angular/router';
 import { UpdateService } from '../update-product/update-product.service';
 import { Http, Headers, RequestOptions, Response} from '@angular/http';
+import { Console } from '@angular/core/src/console';
 
 
 @Component({
@@ -20,8 +21,8 @@ type: any;
 des:any;
 ins :any;
 productTypes: any;
-
-
+types:any;
+typeproduct :any
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -40,14 +41,23 @@ productTypes: any;
   }
   
 save(): void {
- this.type =  this.productTypes.ProductType_Id;
-  let update_string = this.idp + "/" + this.name +"/"+ this.ins +"/" +this.des +"/"+this.id + "/"+this.type;
+console.log("this is line 44: "+this.typeproduct.ProductType_Id);
+ this.types =  this.typeproduct.ProductType_Id;
+ console.log(this.types);
+  //let update_string = this.idp + "/" + this.name +"/"+ this.ins +"/" +this.des +"/"+this.id + "/"+this.types;
+  let update_string = this.id;
+  let obj = {
+    idp: this.idp,
+    name: this.name,
+    ins: this.ins,
+    des: this.des,
+    type: this.types
+  }
   console.log(update_string);
-  
-    this.UpdateService.update(update_string).subscribe( data => this.id = data, 
+    this.UpdateService.update(update_string,obj).subscribe( data => this.id = data, 
      error => console.log(error),
     () => console.log("update complete"));
-    console.log(this.type);
+    // console.log(this.types);
  }
 
 
