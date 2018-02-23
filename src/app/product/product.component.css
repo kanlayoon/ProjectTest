@@ -27,6 +27,7 @@
   .mat-table {
     overflow: auto;
     max-height: 500px;
+    
   }
   mat-card {
     margin: 3%;
@@ -41,6 +42,4 @@ h1 { color: #111;
      text-align: center;
     background-color: #c9c9ff;
    }
-   mat-cell-code{
-     width: 3%
-   }
+   

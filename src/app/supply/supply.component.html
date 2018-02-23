@@ -1,16 +1,21 @@
 <app-header></app-header>
 
-<body>
+
+<body >
+
   <mat-card>
     <h1>การสั่งจ่ายสินค้า</h1>
   
-    <mat-form-field>
-        <mat-select placeholder="สาขา">
-          <mat-option *ngFor="let branch of branchs" [value]="branch.value">
-            {{ branch.viewValue }}
-          </mat-option>
-        </mat-select>
-        </mat-form-field>
+ 
+
+        <mat-form-field>
+            <mat-select placeholder=" สาขา" [(ngModel)]="selectbranch" name="selectbranch"> 
+              <mat-option *ngFor="let branch of branchs" [value]="branch">
+                {{ branch.Branch_Name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
         &nbsp;&nbsp;&nbsp;&nbsp;
         <mat-form-field>
           <mat-select placeholder="หมวดการค้นหา">
@@ -27,13 +32,20 @@
     <!-- </div> -->
     <i class="material-icons col-3">search</i>
     <div class="example-container mat-elevation-z8">
+       
+        <!-- <mat-form-field>
+            <input matInput [matDatepicker]="picker2" placeholder="Angular forms (w/ deserialization)"
+                   [formControl]="serializedDate">
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+          </mat-form-field> -->
 
       <mat-table [dataSource]="dataSource" matSort>
 
         <!-- ID Column -->
         <ng-container matColumnDef="Product_Id">
           <mat-header-cell *matHeaderCellDef mat-sort-header> รหัสสินค้า </mat-header-cell>
-          <mat-cell *matCellDef="let product"> {{product.Product_Id}} </mat-cell>
+          <mat-cell *matCellDef="let product"> {{product.Product_Code}} </mat-cell>
         </ng-container>
 
      
@@ -66,19 +78,25 @@
           <mat-cell *matCellDef="let product"> {{product.Product_Instruction}} </mat-cell>
         </ng-container>
 
-
         <ng-container matColumnDef="BranchProduct_Amount">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> จำนวน </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef mat-sort-header> จำนวนสินค้าในคลัง </mat-header-cell>
+          <mat-cell *matCellDef="let product"> {{product.BranchProduct_Amount}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="input_num">
+          <mat-header-cell *matHeaderCellDef mat-sort-header > จำนวน </mat-header-cell>
           <mat-cell *matCellDef="let product"> <div class="ui input" style="width:70%">
-            <input type="text"  placeholder="จำนวน" >
+            <input type="text" placeholder="จำนวน" [(ngModel)]="product.amount" name="input_name">
+           
           </div> </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="sss">
+        <ng-container matColumnDef="button">
           <mat-header-cell *matHeaderCellDef mat-sort-header>  </mat-header-cell>
-          <mat-cell *matCellDef="let row">  <button class="ui inverted violet  button">สั่งจ่าย</button> </mat-cell>
+          <mat-cell *matCellDef="let product">  <button class="ui inverted violet  button"  (click)="supply(product.Product_Code,product.amount)">สั่งจ่าย</button> </mat-cell>
         </ng-container>
 
+        
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"
         (click)="onRowClicked(row)">
@@ -88,6 +106,6 @@
       <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
     </div>
 
-
+      
   </mat-card>
 </body>

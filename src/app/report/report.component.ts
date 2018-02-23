@@ -12,8 +12,10 @@ export class ReportComponent implements OnInit {
   ngOnInit() {
   }
   foods = [
-    {value: 'steak-0', viewValue: 'Steak'},
-    {value: 'pizza-1', viewValue: 'Pizza'},
-    {value: 'tacos-2', viewValue: 'Tacos'}
+    {value: 'steak-0', viewValue: 'รายงานการสั่งจ่าย'},
+    {value: 'pizza-1', viewValue: 'รายงานคำขอเบิกสินค้า'},
+    {value: 'tacos-2', viewValue: 'รายงานการใช้สินค้า'},
+    {value: 'tacos-2', viewValue: 'ข้อมูลการจองคอร์ส'}
+    
   ];
 }

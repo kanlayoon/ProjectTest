@@ -31,3 +31,7 @@ h1 { color: #111;
   text-align: center;
  background-color: #c9c9ff;
 }
+/* .mat-cell,
+.mat-header-cell {
+  flex: 0 0 10%;
+} */

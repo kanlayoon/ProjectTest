@@ -45,7 +45,7 @@ console.log("this is line 44: "+this.typeproduct.ProductType_Id);
  this.types =  this.typeproduct.ProductType_Id;
  console.log(this.types);
   //let update_string = this.idp + "/" + this.name +"/"+ this.ins +"/" +this.des +"/"+this.id + "/"+this.types;
-  let update_string = this.id;
+  let update_string = this.idp;
   let obj = {
     idp: this.idp,
     name: this.name,

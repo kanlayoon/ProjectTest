@@ -1,10 +1,17 @@
 export class Product{
-    public Product_id: number;
+    public Product_Code: number;
     public Product_name: string; 
     public Product_des: string;
     public Product_instruction: string;
     public Product_amount: number;
     public Product_type_id: number;
+    public Notifications_Amount1 : number;
+    public Notifications_Amount2 : number;
+    public Notifications_Amount3 : number;
+    public Notifications_Exp1 : number;
+    public Notifications_Exp2 : number;
+    public Notifications_Exp3 : number;
+
 }
 
 // export class product{
@@ -24,5 +31,6 @@ export class Product{
 //     public Notifications_Exp1 : number;
 //     public Notifications_Exp2 : number;
 //     public Notifications_Exp3 : number;
-
+ 
 // }
+ 

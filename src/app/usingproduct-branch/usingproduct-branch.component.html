@@ -3,20 +3,25 @@
 <body>
     <mat-card>
         <h1>ข้อมูลการใช้สินค้า</h1>
-        <mat-tab-group>
-            <mat-tab label="การทำคอร์ส">
+        
+           
                 <mat-card>
-                   
+                        <mat-form-field class="example-full-width">
+                                <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker touchUi="true" #picker></mat-datepicker>
+                              </mat-form-field>
+
                     <mat-form-field class="selectCP">
-                        <mat-select placeholder="ชื่อสินค้า">
-                            <mat-option *ngFor="let food of foods" [value]="food.value">
-                                {{ food.viewValue }}
+                        <mat-select placeholder="คอร์ส" [(ngModel)]="courseSelected" name="course">
+                            <mat-option *ngFor="let Course of course" [value]="Course">
+                                {{ Course.Course_Name }}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
                     &nbsp;&nbsp;&nbsp;
                     <mat-form-field class="selectCP">
-                        <mat-select placeholder=" คอร์ส">
+                        <mat-select placeholder=" ชื่อสินค้า">
                             <mat-option *ngFor="let food of foods" [value]="food.value">
                                 {{ food.viewValue }}
                             </mat-option>
@@ -34,93 +39,30 @@
 
                         <mat-table [dataSource]="dataSource" matSort>
 
-                            <!-- ID Column -->
-                            <ng-container matColumnDef="id">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
-                                <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
-                            </ng-container>
+                            <ng-container matColumnDef="Product_Code">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header> รหัสสินค้า </mat-header-cell>
+                                <mat-cell *matCellDef="let product"> {{product.Product_Code}} </mat-cell>
+                              </ng-container>
+                      
+                              <!-- Name Column -->
+                              <ng-container matColumnDef="Product_Name">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header> ชื่อสินค้า </mat-header-cell>
+                                <mat-cell *matCellDef="let product"> {{product.Product_Name}} </mat-cell>
+                              </ng-container>
 
-                            <!-- Progress Column -->
-                            <ng-container matColumnDef="progress">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header> Progress </mat-header-cell>
-                                <mat-cell *matCellDef="let row"> {{row.progress}}% </mat-cell>
-                            </ng-container>
+                              <ng-container matColumnDef="amount">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header > จำนวน </mat-header-cell>
+                                <mat-cell *matCellDef="let product">
+                                  <div class="ui input" style="width:70%">
+                                    <input type="text" placeholder="จำนวน" [(ngModel)]="product.amount" name="input_name">
+                                  </div>
+                                </mat-cell>
+                              </ng-container>
 
-                            <!-- Name Column -->
-                            <ng-container matColumnDef="name">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
-                                <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
-                            </ng-container>
-
-                            <!-- Color Column -->
-                            <ng-container matColumnDef="color">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header> Color </mat-header-cell>
-                                <mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.color}} </mat-cell>
-                            </ng-container>
-
-                            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                            <mat-row *matRowDef="let row; columns: displayedColumns;">
-                            </mat-row>
-                        </mat-table>
-
-                        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-                    </div>
-
-                </mat-card>
-            </mat-tab>
-            <mat-tab label="การขายสินค้า">
-                <mat-card>
-                  
-                    <mat-form-field class="selectCP">
-                            <mat-select placeholder="ชื่อสินค้า">
-                                <mat-option *ngFor="let food of foods" [value]="food.value">
-                                    {{ food.viewValue }}
-                                </mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                        &nbsp;&nbsp;&nbsp;
-                        <mat-form-field class="selectCP">
-                            <mat-select placeholder=" คอร์ส">
-                                <mat-option *ngFor="let food of foods" [value]="food.value">
-                                    {{ food.viewValue }}
-                                </mat-option>
-                            </mat-select>
-    
-    
-                        </mat-form-field>
-                    <div class="example-header">
-                        <mat-form-field>
-                            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-                        </mat-form-field>
-                    </div>
-
-                    <div class="example-container mat-elevation-z8">
-
-                        <mat-table [dataSource]="dataSource" matSort>
-
-                            <!-- ID Column -->
-                            <ng-container matColumnDef="id">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
-                                <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
-                            </ng-container>
-
-                            <!-- Progress Column -->
-                            <ng-container matColumnDef="progress">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header> Progress </mat-header-cell>
-                                <mat-cell *matCellDef="let row"> {{row.progress}}% </mat-cell>
-                            </ng-container>
-
-                            <!-- Name Column -->
-                            <ng-container matColumnDef="name">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
-                                <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
-                            </ng-container>
-
-                            <!-- Color Column -->
-                            <ng-container matColumnDef="color">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header> Color </mat-header-cell>
-                                <mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.color}} </mat-cell>
-                            </ng-container>
+                              <ng-container matColumnDef="button">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header>  </mat-header-cell>
+                                <mat-cell *matCellDef="let product">  <button class="ui inverted violet  button"  (click)="useProduct(courseSelected,product.Product_Code,product.amount)">ใช้สินค้า</button> </mat-cell>
+                              </ng-container>
 
                             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                             <mat-row *matRowDef="let row; columns: displayedColumns;">
@@ -129,9 +71,11 @@
 
                         <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
                     </div>
+                    
 
                 </mat-card>
-            </mat-tab>
-        </mat-tab-group>
+          
+         
+        
     </mat-card>
 </body>

@@ -8,7 +8,7 @@
   <div class="example-container" style="text-align:center">
     <mat-form-field>
       <input matInput placeholder="รหัสสินค้า" [formControl]="code" required [(ngModel)]="id">
-      <!-- <input matInput placeholder="รหัสสินค้า"> -->
+     
     </mat-form-field>
     <br>
     <mat-form-field>
@@ -37,7 +37,7 @@
     <br>
 
     <mat-form-field>
-      <input matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="date">
+      <input matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="date"  >
       <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>

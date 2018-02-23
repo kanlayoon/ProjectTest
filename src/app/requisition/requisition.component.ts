@@ -2,20 +2,99 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatFormFieldModule, MatError, MatFormField, MatPlaceholder, MatFormFieldControl } from '@angular/material/form-field';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { RequisitionService } from '../requisition/Requisition.service';
+import { Http, Headers, RequestOptions, Response } from '@angular/http';
+import { Observable, Subject } from 'rxjs/Rx';
+import { DataSource } from '@angular/cdk/collections';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Reqproduct } from './requisition.model';
+import { reqCheck } from './requisition.model';
+import { ProductService } from '../product/product.service';
 
 export class State {
-  constructor(public name: string, public population: string, public flag: string) { }
+  constructor(public name: string, public population: string, public flag: string,
+    private route: ActivatedRoute,
+    private router: Router, private RequisitionService: RequisitionService, private _http: Http,
+    
+  ) { }
 }
-
 @Component({
   selector: 'app-requisition',
   templateUrl: './requisition.component.html',
   styleUrls: ['./requisition.component.css']
 })
-export class RequisitionComponent implements OnInit {
-  ngOnInit() {
-  }
 
+export class RequisitionComponent implements OnInit {
+  constructor(private RequisitionService: RequisitionService, private _http: Http) { }
+  Reqproducts: any;
+  reqCheck: any;
+  reqAmount:any;
+  code: any;
+  pCode: any;
+  pName: any;
+  branchs : any;
+  products : any;
+  amount :any;
+  date : any;
+  supplyAmount :any;
+  selectbranch :any;
+  branch :any;
+  product : any;
+  ngOnInit() {
+    this.RequisitionService.getBranch().subscribe(data => this.branchs = data,
+      error => console.log(error),
+      () => console.log("Get all product complete"));
+
+    this.RequisitionService.get_AllReq().subscribe(data => {
+      this.Reqproducts = data;
+      console.log(data);
+      console.log("get all req complitse")
+    }, error => console.log(error));
+  }
+  supplyReq(Pcode,amount,Branch_Id): void{
+    console.log("Fsupply");
+  console.log("amount"+ amount);
+    this.branch =  Branch_Id;
+    this.code =  Pcode;
+    this.amount =  amount;
+    let obj = {
+      bid : this.branch,
+      code : this.code, 
+      hid : 1,
+      amount : this.amount,
+      date : this.date = new Date()
+
+    };
+    console.log("supplyReq " + obj.bid + obj.code + obj.amount + obj.date + obj.hid ); 
+    
+    this.RequisitionService.supplyReq(obj).subscribe(data => {
+      this.supplyAmount = data;  
+    }, error => console.log(error));
+  }
+  check(Pcode, Pname): void {
+    console.log("Fcheck");
+    let Code = this.code;
+    this.pCode = Pcode;
+    this.pName = Pname;
+    
+   
+    this.RequisitionService.check(Pcode).subscribe(data => {
+      this.reqCheck = data;
+      error => console.log(error);
+      // console.log(this.reqCheck);
+      // console.log("pcode" + Pcode)
+    });
+    let branch = {
+      bid : 1,
+      code:Pcode
+      
+    };
+    this.RequisitionService.get_amount(branch).subscribe(data => {
+      this.reqAmount = data;
+      // console.log( "getAmount" + this.reqAmount)
+    },error => console.log(error));
+
+  }
   myControl: FormControl = new FormControl();
   foods = [
     { value: 'steak-0', viewValue: 'Steak' },
@@ -23,71 +102,23 @@ export class RequisitionComponent implements OnInit {
     { value: 'tacos-2', viewValue: 'Tacos' }
   ];
 
-  options = [
-    'One',
-    'Two',
-    'Three'
-  ];
 
-  displayedColumns = ['id', 'name', 'progress', 'check','amount','note','button'];
-  dataSource: MatTableDataSource<UserData>;
-
+  displayedColumns = ['ProductReq_Date', 'branch', 'Product_Code', 'Product_Name','req_Amount', 'check', 'amount', 'note', 'button'];
+  displayedColumns2 = ['branch', 'amount', 'date'];
+  dataSource1 = new requisitionDataSource(this.RequisitionService);
+  
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-
-  constructor() {
-    // Create 100 users
-    const users: UserData[] = [];
-    for (let i = 1; i <= 100; i++) { users.push(createNewUser(i)); }
-
-    // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(users);
-  }
-
-  /**
-   * Set the paginator and sort after the view init since this component will
-   * be able to query its view for the initialized paginator and sort.
-   */
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
-
-  applyFilter(filterValue: string) {
-    filterValue = filterValue.trim(); // Remove whitespace
-    filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
-    this.dataSource.filter = filterValue;
-  }
-
 }
 
-
-
-
-/** Builds and returns a new User. */
-function createNewUser(id: number): UserData {
-  const name =
-      NAMES[Math.round(Math.random() * (NAMES.length - 1))] + ' ' +
-      NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) + '.';
-
-  return {
-    id: id.toString(),
-    name: name,
-    progress: Math.round(Math.random() * 100).toString(),
-    color: COLORS[Math.round(Math.random() * (COLORS.length - 1))]
-  };
-}
-
-/** Constants used to fill up our data base. */
-const COLORS = ['maroon', 'red', 'orange', 'yellow', 'olive', 'green', 'purple',
-  'fuchsia', 'lime', 'teal', 'aqua', 'blue', 'navy', 'black', 'gray'];
-const NAMES = ['Maia', 'Asher', 'Olivia', 'Atticus', 'Amelia', 'Jack',
-  'Charlotte', 'Theodore', 'Isla', 'Oliver', 'Isabella', 'Jasper',
-  'Cora', 'Levi', 'Violet', 'Arthur', 'Mia', 'Thomas', 'Elizabeth'];
-
-export interface UserData {
-  id: string;
-  name: string;
-  progress: string;
-  color: string;
+//////////////////////////////////////////////////////
+export class requisitionDataSource extends DataSource<any> {
+  products:any;
+  constructor(private RequisitionService: RequisitionService) {
+    super();
+  }
+  connect(): Observable<Reqproduct[]> {
+    return this.RequisitionService.get_AllReq();
+  }
+  disconnect() { }
 }

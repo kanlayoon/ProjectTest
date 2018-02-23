@@ -1,69 +1,86 @@
 import { Component, OnInit } from '@angular/core';
 import { ViewChild} from '@angular/core';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import { UsingProductBService } from '../usingproduct-branch/usingproductB.service';
+import { Http, Headers, RequestOptions, Response } from '@angular/http';
+import { Observable, Subject } from 'rxjs/Rx';
+import { DataSource } from '@angular/cdk/collections';
+import { Router, ActivatedRoute } from '@angular/router';
+// import { course } from './usingproduct-branch.model';
+import { Product } from '../product/product.model';
 @Component({
   selector: 'app-usingproduct-branch',
   templateUrl: './usingproduct-branch.component.html',
   styleUrls: ['./usingproduct-branch.component.css']
 })
 export class UsingproductBranchComponent implements OnInit {
-  displayedColumns = ['id', 'name', 'progress', 'color'];
-  dataSource: MatTableDataSource<UserData>;
+  Code:any;
+  Amount:any;
+  Date :any;
+  use :any[];
+  CourseSel:any;
+ public course: any;
+ courseSelected: any;
+ public product:any[];
+ 
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private UsingProductBService: UsingProductBService, private _http: Http) { }
+  displayedColumns = ['Product_Code', 'Product_Name', 'amount','button'];
+  dataSource = new ProductDataSource(this.UsingProductBService);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   ngOnInit() {
+    this.UsingProductBService.get_course().subscribe(data => {
+      this.course = data;
+      console.log(data);
+   
+    },
+      error => console.log(error));
+      this.UsingProductBService.getAll().subscribe(data => {
+        this.product = data;
+        console.log(data);
+     
+      },
+        error => console.log(error));
   }
   foods = [
     { value: 'steak-0', viewValue: 'Steak' },
     { value: 'pizza-1', viewValue: 'Pizza' },
     { value: 'tacos-2', viewValue: 'Tacos' }
   ];
-  constructor() { 
-    const users: UserData[] = [];
-    for (let i = 1; i <= 100; i++) { users.push(createNewUser(i)); }
-
-    // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(users);
+  useProduct(Course,code,amount){
+    this.Code = code;
+    this.Amount = amount;
+    this.CourseSel = Course.Course_Id;
+    console.log("course"+this.CourseSel);
+    console.log("amount"+amount);
+    console.log("code"+this.Code);
+    let obj = {
+      code: this.Code,
+      amount: this.Amount,
+      course: this.course,
+      date :this.Date = new Date(),
+      bid: 3
+    }
+    this.UsingProductBService.useProduct(obj).subscribe(data => {
+      this.use = data;  
+    }, error => console.log(error), () => console.log("insert complete"));
+    
   }
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
-
-  applyFilter(filterValue: string) {
-    filterValue = filterValue.trim(); // Remove whitespace
-    filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
-    this.dataSource.filter = filterValue;
-  }
+ 
 }
-
-/** Builds and returns a new User. */
-function createNewUser(id: number): UserData {
-  const name =
-      NAMES[Math.round(Math.random() * (NAMES.length - 1))] + ' ' +
-      NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) + '.';
-
-  return {
-    id: id.toString(),
-    name: name,
-    progress: Math.round(Math.random() * 100).toString(),
-    color: COLORS[Math.round(Math.random() * (COLORS.length - 1))]
-  };
-}
-
-/** Constants used to fill up our data base. */
-const COLORS = ['maroon', 'red', 'orange', 'yellow', 'olive', 'green', 'purple',
-  'fuchsia', 'lime', 'teal', 'aqua', 'blue', 'navy', 'black', 'gray'];
-const NAMES = ['Maia', 'Asher', 'Olivia', 'Atticus', 'Amelia', 'Jack',
-  'Charlotte', 'Theodore', 'Isla', 'Oliver', 'Isabella', 'Jasper',
-  'Cora', 'Levi', 'Violet', 'Arthur', 'Mia', 'Thomas', 'Elizabeth'];
-
-  export interface UserData {
-    id: string;
-    name: string;
-    progress: string;
-    color: string;
+export class ProductDataSource extends DataSource<any> {
+  constructor(private UsingProductBService: UsingProductBService) {
+    super();
   }
+  
+  connect(): Observable<Product[]> {
+    return this.UsingProductBService.getAll();
+  }
+  disconnect() { }
+}
 
 

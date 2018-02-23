@@ -10,8 +10,8 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import {MatButtonModule, MatCheckboxModule ,MatToolbarModule,MatTab, MatTabsModule, MatIconModule,
        MatMenuModule,MatCardModule,MatGridListModule
       ,MatOptionModule,MatSelectModule,MatAutocompleteModule,MatInputModule,MatTableModule,
-      MatPaginatorModule,MatDatepickerModule,MatNativeDateModule,MatSort,MatSortModule,MatRadioModule,
-    
+      MatPaginatorModule,MatDatepickerModule,MatNativeDateModule,MatSort,MatSortModule,MatRadioModule,MatChipsModule
+    ,    MatDialogModule
     } from '@angular/material';
 
 // import { MatFormFieldModule,MatFormField} from '@angular/material/form-field';
@@ -56,8 +56,12 @@ import { SupplyService } from './supply/supply.service';
 import {UpdateService} from './update-product/update-product.service'
 import { NgModel } from '@angular/forms/src/directives/ng_model';
 import {AddProductTypeService} from './add-product/add-productType.service'
-
-
+import { RequisitionService } from './requisition/Requisition.service';
+import { RequestService } from './request/request.service';
+import { UsingProductBService } from './usingproduct-branch/usingproductB.service';
+import { notificationService } from './notification/notification.service';
+import { ReservationService } from './reservation/reservation.service';
+import { HeaderService } from './header/header.service';
 
 @NgModule({
   declarations: [ AppComponent, 
@@ -90,8 +94,10 @@ import {AddProductTypeService} from './add-product/add-productType.service'
             MatSortModule,
             HttpModule,
             MatRadioModule,
+            MatChipsModule,
             
-           
+            MatDialogModule
+        
   ],
   
   bootstrap: [AppComponent,],
@@ -107,7 +113,12 @@ import {AddProductTypeService} from './add-product/add-productType.service'
                 SupplyService,
                UpdateService,
                AddProductTypeService,
-   
+               RequisitionService,
+               RequestService,
+               UsingProductBService,
+               notificationService,
+               ReservationService,
+               HeaderService,
   ],
 
 

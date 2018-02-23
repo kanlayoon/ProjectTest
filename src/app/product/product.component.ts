@@ -7,9 +7,12 @@ import { Product } from './product.model';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { Observable, Subject } from 'rxjs/Rx';
 import { DataSource } from '@angular/cdk/collections';
-
+import { Router, ActivatedRoute } from '@angular/router';
 export class State {
-  constructor(public name: string, public population: string, public flag: string) { }
+  constructor(public name: string, 
+    public population: string, 
+    public flag: string,
+  ) { }
 }
 
 @Component({
@@ -19,8 +22,12 @@ export class State {
   providers: [ProductService]
 })
 export class ProductComponent implements OnInit {
+  product: any;
+  idp:any;
   private productList: Product[];
-  constructor(private productService: ProductService, private _http: Http) {
+  constructor( private route: ActivatedRoute,
+    private router: Router,
+    private productService: ProductService, private _http: Http) {
 
   }
   public products: any[];
@@ -29,21 +36,33 @@ export class ProductComponent implements OnInit {
     this.productService.getAll().subscribe(data => {
       this.products = data;
       console.log(data)
+      
     },
       error => console.log(error));
-
-  }
-
-
-  myControl: FormControl = new FormControl();
-  Catproduct = [
-    { value: 'steak-0', viewValue: 'รหัสสินค้า' },
-    { value: 'pizza-1', viewValue: 'ชื่อสินค้า' },
-    { value: 'tacos-2', viewValue: 'ประเภทสินค้า' }
+  }  
+  category = [
+    {value: '1', viewValue: ''},
+    {value: '2', viewValue: 'Pizza'},
+    {value: '3', viewValue: 'Tacos'}
   ];
 
 
-  displayedColumns = ['Product_Id', 'Product_Name', 'ProductType_Name', 'BranchProduct_EXP', 'Product_Des', 'Product_Instruction', 'BranchProduct_Amount', 'sss'];
+  addIdDel(Product_Id){
+    this.idp = Product_Id;
+    console.log("addIdDel: " + this.idp);
+  }
+  delProduct(): void { 
+      let update_string = this.idp;
+      console.log(update_string);
+      this.productService.del(update_string).subscribe( data => this.idp = data, 
+         error => console.log(error),
+        () => console.log("delete complete"));
+        // console.log(this.types);
+      
+     }
+
+
+  displayedColumns = ['Product_Code', 'Product_Name', 'ProductType_Name', 'BranchProduct_EXP', 'Product_Des', 'Product_Instruction', 'BranchProduct_Amount', 'sss'];
   // dataSource: MatTableDataSource<UserData>;
   dataSource = new ProductDataSource(this.productService);
 
@@ -67,6 +86,8 @@ export class ProductComponent implements OnInit {
     // this.dataSource.filter = filterValue;
   }
 
+
+
 }
 
 export class ProductDataSource extends DataSource<any> {
@@ -80,22 +101,4 @@ export class ProductDataSource extends DataSource<any> {
 }
 
 
-
-/** Builds and returns a new User. */
-// function createNewUser(id: number): UserData {
-//   const name =
-//       NAMES[Math.round(Math.random() * (NAMES.length - 1))] + ' ' +
-//       NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) + '.';
-//       const aaa =
-//       aaas[Math.round(Math.random() * (aaas.length - 1))] + ' ' +
-//       aaas[Math.round(Math.random() * (aaas.length - 1))].charAt(0) + '.';
-
-//   return {
-//     id: id.toString(),
-//     name: name,
-//     progress: Math.round(Math.random() * 100).toString(),
-//     color: COLORS[Math.round(Math.random() * (COLORS.length - 1))],
-//     aaa:aaa,
-//   };
-// }
 

@@ -4,51 +4,57 @@ import { MatFormFieldModule, MatError, MatFormField, MatPlaceholder, MatFormFiel
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { SupplyService } from '../supply/supply.service';
 import { Product } from '../product/product.model';
-import { Http, Headers, RequestOptions, Response} from '@angular/http';
+import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { Observable, Subject } from 'rxjs/Rx';
-import {DataSource} from '@angular/cdk/collections';
+import { DataSource } from '@angular/cdk/collections';
+import { Router, ActivatedRoute } from '@angular/router';
 
 export class State {
-  constructor(public name: string, public population: string, public flag: string) { }
+  constructor(public name: string, public population: string, public flag: string,
+    private route: ActivatedRoute,
+    private router: Router,
+    private supplyService: SupplyService, private _http: Http) { }
 }
 
 @Component({
-  selector: 'app-supply',
-  templateUrl: './supply.component.html',
+  selector: 'app-supply', 
   styleUrls: ['./supply.component.css'],
-  
+  templateUrl: './supply.component.html',
 })
 export class SupplyComponent implements OnInit {
-  private productList: Product[];
-  constructor( private supplyService: SupplyService, private _http: Http ) {
-   
-  }
+  product:any;
+  code: any;
+  
+  Amount :number;
+  branchsel: any;
   public products: any[];
-
-  ngOnInit() {     
-    this.supplyService.getAll().subscribe( data => this.products = data, 
-     error => console.log(error),
-    () => console.log("Get all product complete"));
+  branchs: any;
+  selectbranch :any;
+  branch: any;
+  date:any;
+  private productList: Product[];
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private supplyService: SupplyService, private _http: Http) {
 
   }
+ 
+  ngOnInit() {
+    this.supplyService.getBranch().subscribe(data => this.branchs = data,
+      error => console.log(error),
+      () => console.log("Get all product complete"));
 
-  
-  myControl: FormControl = new FormControl();
-  Catproduct = [
-    { value: 'steak-0', viewValue: 'รหัสสินค้า' },
-    { value: 'pizza-1', viewValue: 'ชื่อสินค้า' },
-    { value: 'tacos-2', viewValue: 'ประเภทสินค้า' }
-  ];
-  branchs =[
-    { value: 'steak-0', viewValue: 'สาขา1' },
-    { value: 'steak-0', viewValue: 'สาขา2' },
-    { value: 'steak-0', viewValue: 'สาขา3' },
-    { value: 'steak-0', viewValue: 'สาขา4' },
-    { value: 'steak-0', viewValue: 'สาขา5' },
-  ]
+    this.supplyService.getAll().subscribe(data => {
+      this.products = data;
+      console.log(data);
+   
+    },
+      error => console.log(error));
 
-  
-  displayedColumns = ['Product_Id', 'Product_Name','ProductType_Name','BranchProduct_EXP','Product_Des','Product_Instruction','BranchProduct_Amount','sss'];
+  }
+ 
+  displayedColumns = ['Product_Id', 'Product_Name', 'ProductType_Name', 'BranchProduct_EXP', 'Product_Des', 'Product_Instruction', 'BranchProduct_Amount', 'input_num', 'button'];
   // dataSource: MatTableDataSource<UserData>;
   dataSource = new ProductDataSource(this.supplyService);
 
@@ -56,20 +62,30 @@ export class SupplyComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   
-  /**
-   * Set the paginator and sort after the view init since this component will
-   * be able to query its view for the initialized paginator and sort.
-   */
-  ngAfterViewInit() {
-    // this.dataSource.paginator = this.paginator;
-    // this.dataSource.sort = this.sort;
+  supply(pCode,amount): void {
+    console.log("Fsupply");
+    // console.log(this.selectbranch);
+    this.branchsel = this.selectbranch.Branch_Id;
+    this.Amount = parseInt(amount);
+    this.code = pCode;
+    console.log(pCode);
+    console.log(amount);
+    let obj = {
+      code : this.code,
+      number: this.Amount,
+      branchid: this.branchsel,
+      Date: this.date = new Date(),
+      head_id : 1
+    }
+   console.log(obj)
     
+    this.supplyService.supply(obj).subscribe(data => {
+      this.supply = data;  
+    }, error => console.log(error));
   }
 
-  applyFilter(filterValue: string) {
-    filterValue = filterValue.trim(); // Remove whitespace
-    filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
-    // this.dataSource.filter = filterValue;
+  onRowClicked(row) {
+    
   }
 
 }
@@ -81,26 +97,6 @@ export class ProductDataSource extends DataSource<any> {
   connect(): Observable<Product[]> {
     return this.supplyService.getAll();
   }
-  disconnect() {}
+  disconnect() { }
 }
-
-
-
-/** Builds and returns a new User. */
-// function createNewUser(id: number): UserData {
-//   const name =
-//       NAMES[Math.round(Math.random() * (NAMES.length - 1))] + ' ' +
-//       NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) + '.';
-//       const aaa =
-//       aaas[Math.round(Math.random() * (aaas.length - 1))] + ' ' +
-//       aaas[Math.round(Math.random() * (aaas.length - 1))].charAt(0) + '.';
-
-//   return {
-//     id: id.toString(),
-//     name: name,
-//     progress: Math.round(Math.random() * 100).toString(),
-//     color: COLORS[Math.round(Math.random() * (COLORS.length - 1))],
-//     aaa:aaa,
-//   };
-// }
 

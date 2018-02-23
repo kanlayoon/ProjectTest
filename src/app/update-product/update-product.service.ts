@@ -20,7 +20,7 @@ export class UpdateService {
     let options = new RequestOptions({ headers: headers });
     return this._http.put(this.actionUrl + "/Product/update/" + update_string, obj, options )
     .map( (response: Response) => <any>response.json() )
-    .do( x => console.log(x));
+    .do( x => console.log(x));   
   }
   public getAll = (): Observable<any[]> =>  {
     return this._http.get(this.actionUrl + "/ProductTypes")

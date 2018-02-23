@@ -26,29 +26,59 @@
 
       <mat-table [dataSource]="dataSource" matSort>
 
-        <!-- ID Column -->
-        <ng-container matColumnDef="id">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
-        </ng-container>
+       <!-- ID Column -->
+       <ng-container matColumnDef="Product_Id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> รหัสสินค้า </mat-header-cell>
+        <mat-cell *matCellDef="let product"> {{product.Product_Code}} </mat-cell>
+      </ng-container>
 
-        <!-- Progress Column -->
-        <ng-container matColumnDef="progress">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Progress </mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{row.progress}}% </mat-cell>
-        </ng-container>
+   
 
-        <!-- Name Column -->
-        <ng-container matColumnDef="name">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
-        </ng-container>
+      <!-- Progress Column -->
+      <ng-container matColumnDef="Product_Name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> ชื่อสินค้า </mat-header-cell>
+        <mat-cell *matCellDef="let product"> {{product.Product_Name}} </mat-cell>
+      </ng-container>
 
-        <!-- Color Column -->
-        <ng-container matColumnDef="color">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Color </mat-header-cell>
-          <mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.color}} </mat-cell>
-        </ng-container>
+      <!-- Name Column -->
+      <ng-container matColumnDef="ProductType_Name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> ประเภทสินค้า </mat-header-cell>
+        <mat-cell *matCellDef="let product"> {{product.ProductType_Name}} </mat-cell>
+      </ng-container>
+
+      <!-- Color Column -->
+      <ng-container matColumnDef="BranchProduct_EXP">
+        <mat-header-cell *matHeaderCellDef mat-sort-header   > วันหมดอายุ </mat-header-cell>
+        <mat-cell *matCellDef="let product"  > {{product.BranchProduct_EXP | date:'dd/MM/yyyy' }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Product_Des">
+        <mat-header-cell *matHeaderCellDef mat-sort-header > คำอธิบาย </mat-header-cell>
+        <mat-cell *matCellDef="let product"> {{product.Product_Des}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Product_Instruction">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> วิธีใช้ </mat-header-cell>
+        <mat-cell *matCellDef="let product"> {{product.Product_Instruction}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="BranchProduct_Amount">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> จำนวนสินค้าในคลัง </mat-header-cell>
+        <mat-cell *matCellDef="let product"> {{product.BranchProduct_Amount}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="input_num">
+        <mat-header-cell *matHeaderCellDef mat-sort-header > จำนวน </mat-header-cell>
+        <mat-cell *matCellDef="let product"> <div class="ui input" style="width:70%">
+          <input type="text" placeholder="จำนวน" [(ngModel)]="product.amount" name="input_name">
+         
+        </div> </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="button">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>  </mat-header-cell>
+        <mat-cell *matCellDef="let product">  <button class="ui inverted violet  button"  (click)="request(product.Product_Code,product.amount)">ขอเบิก</button> </mat-cell>
+      </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;">

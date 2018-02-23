@@ -5,16 +5,6 @@
     <h1>สินค้า</h1>
     <a [routerLink]="'/add-product'" ><button mat-raised-button color="primary">เพิมสินค้า</button></a> <br><br><br>
     
-  <!-- <table border=2>
-    <tr>
-      <td> ID </td>
-      <td> Des </td>
-    </tr>
-    <tr *ngFor="let product of products">
-      <td> {{ product.Product_Id }} </td>
-      <td> {{ product.Product_Des }} </td>
-    </tr>
-  </table> -->
 
 
     <mat-form-field>
@@ -38,9 +28,9 @@
 
         <!-- ID Column -->
         
-        <ng-container matColumnDef="Product_Id">
-          <mat-header-cell  *matHeaderCellDef mat-sort-header > รหัสสินค้า </mat-header-cell>
-          <mat-cell  *matCellDef="let product"> {{product.Product_Id}} </mat-cell>
+        <ng-container matColumnDef="Product_Code"> 
+          <mat-header-cell style="flex: 0 0 10%;" *matHeaderCellDef mat-sort-header  > รหัสสินค้า </mat-header-cell>
+          <mat-cell style="flex: 0 0 10%;" *matCellDef="let product"> {{product.Product_Code}} </mat-cell>
         </ng-container>
 
      
@@ -73,14 +63,16 @@
           <mat-cell *matCellDef="let product"> {{product.Product_Instruction}} </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="BranchProduct_Amount">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> จำนวน </mat-header-cell>
-          <mat-cell *matCellDef="let product"> {{product.BranchProduct_Amount}} </mat-cell>
+        <ng-container matColumnDef="BranchProduct_Amount" >
+          <mat-header-cell  *matHeaderCellDef mat-sort-header> จำนวน </mat-header-cell>
+          <mat-cell  *matCellDef="let product"> {{product.BranchProduct_Amount}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="sss">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>  </mat-header-cell>
-          <mat-cell *matCellDef="let product"> <button class="ui inverted red button">ลบ</button> &nbsp;  <a routerLink="/update-product/{{product.Product_Id}}" ><button class="ui inverted orange button">แก้ไข</button></a> </mat-cell>
+          <mat-header-cell style="flex: 0 0 15%;" *matHeaderCellDef mat-sort-header>  </mat-header-cell>
+          <mat-cell style="flex: 0 0 15%;" *matCellDef="let product">  
+            <button class="ui inverted red button"  data-toggle="modal" data-target="#myModal" (click)="addIdDel(product.Product_Code)">ลบ</button> 
+            &nbsp;  <a routerLink="/update-product/{{product.Product_Id}}" ><button class="ui inverted orange button">แก้ไข</button></a> </mat-cell>
         </ng-container> 
         
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -93,4 +85,31 @@
 
 
   </mat-card>
+
+
+   <!-- The Modal -->
+   <div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">ลบสินค้า</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+          คุณต้องการลบสินค้าออกจากคลัง
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+           <button type="button" class="btn btn-success"  (click)="delProduct()">ตกลง</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
 </body>

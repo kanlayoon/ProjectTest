@@ -26,6 +26,9 @@ export class AddProductComponent implements OnInit {
   typeproduct :any;
   date :any;
   amount : any;
+  
+ 
+  
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -35,6 +38,7 @@ export class AddProductComponent implements OnInit {
   ) {
       
   }
+  
   ngOnInit() {
     this.updateService.getAll().subscribe( data => this.productTypes = data, 
       error => console.log(error),
@@ -78,19 +82,20 @@ export class AddProductComponent implements OnInit {
        console.log(this.types);
         // let insert_string = this.idp + "/" + this.name +"/"+ this.ins +"/" +this.des +"/"+this.id + "/"+this.types;
         console.log("add dataaaaaaaaaaa");
-        let insert_id = this.id;
+        let insert_p = this.id; 
         let obj = {
-          idp: this.id,
+          id: this.id,
           name: this.name,
           ins: this.ins,
           des: this.des,
           type: this.types,
           date :this.date,
           amount:this.amount,
-          idb:1
+          idb: 1
         }
-        console.log(insert_id);
-          this.AddProductTypeService.sp_insert_Product(insert_id,obj).subscribe( data => this.id = data, 
+        console.log(insert_p);
+        console.log(obj);
+          this.AddProductTypeService.sp_insert_Product(insert_p,obj).subscribe( data => this.id = data, 
            error => console.log(error),
           () => console.log("insert complete"));
           // console.log(this.types);

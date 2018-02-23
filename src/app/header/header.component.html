@@ -9,28 +9,53 @@
   <a [routerLink]="'/product'"><button mat-button >สินค้า</button></a>
   <a [routerLink]="'/supply'"><button mat-button >การสั่งจ่ายสินค้า</button></a>
   <a [routerLink]="'/requisition'"><button mat-button>คำขอเบิกสินค้า</button></a>
-  <a [routerLink]="'/using-product'"><button mat-button >ข้อมูลการใช้สินค้าสาขาย่อย</button></a>
+  <!-- <a [routerLink]="'/using-product'"><button mat-button >ข้อมูลการใช้สินค้าสาขาย่อย</button></a> -->
   <a [routerLink]="'/notification'"><button mat-button >ตั้งค่าการแจ้งเตือน</button></a>
   <a [routerLink]="'/report'"><button mat-button >ออกรายงาน</button></a>
   
   <span class="example-spacer"></span>
   
-  <mat-card-content class="header-card">
-  <i class="material-icons" [matMenuTriggerFor]="menu"role="img" aria-hidden="true" >notifications</i>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item>Profile</button>
-      <button mat-menu-item>Logout</button>
+
+  <i class="material-icons" [matMenuTriggerFor]="menu"role="img" aria-hidden="true" >notifications </i>
+   
+  <div *ngIf = "noti1">
+    <mat-chip-list>
+        <mat-chip  color="warn" selected="true"  [matMenuTriggerFor]="menu" role="img" aria-hidden="true"> 1</mat-chip>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item > {{products.Product_Name}}</button>
+            <button mat-menu-item> ระดับที่ 1 สินค้าในคลังใกล้หมดขั้นวิกฤต</button>
+          </mat-menu>
+  </mat-chip-list>
+</div>
+<div *ngIf = "noti2">
+  <mat-chip-list>
+      <mat-chip  color="warn" selected="true"  [matMenuTriggerFor]="menu" role="img" aria-hidden="true"> 1</mat-chip>
+      <mat-menu #menu="matMenu">
+          <button mat-menu-item > {{products.Product_Name}}</button>
+          <button mat-menu-item> ระดับที่ 2 สินค้าในคลังใกล้หมดขั้นวิกฤต</button>
+        </mat-menu>
+</mat-chip-list>
+</div>
+<div *ngIf = "noti3">
+  <mat-chip-list>
+  <mat-chip  color="warn" selected="true"  [matMenuTriggerFor]="menu" role="img" aria-hidden="true"> 1</mat-chip>
+  <mat-menu #menu="matMenu">
+      <button mat-menu-item > {{products.Product_Name}}</button>
+      <button mat-menu-item> ระดับที่ 3 สินค้าในคลังใกล้หมดขั้นวิกฤต</button>
     </mat-menu>
-  </mat-card-content>
+</mat-chip-list>
+</div>
  
-  <mat-card-content class="header-card">
+  
   <mat-icon [matMenuTriggerFor]="menu" role="img" aria-hidden="true">person</mat-icon>
   <mat-menu #menu="matMenu">
     <button mat-menu-item>Profile</button>
     <button mat-menu-item>Logout</button>
   </mat-menu>
-  </mat-card-content>
+  
 
 
 </mat-toolbar>
-
+<!-- 
+<div class="imageDiv"></div>
+<div class="imageDiv bottomDiv"></div> -->

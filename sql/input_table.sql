@@ -108,33 +108,33 @@ alter column [Manager_Password] nvarchar(20)
 
 
 
-
+delete  from Product
 insert into [dbo].[Product]
-			([Product_Name],
+			(Product_Code,
+			[Product_Name],
 			[Product_Des],
 			[Product_Instruction],
-			[Product_EXP],
-			[Product_Amount],
 			[ProductType_Id])
 			
 		values
 		
-		('เซรั่มผิวขาว','เซรั่มผิวขาวซึมเข้าชั้นผิวง่าย ให้ผิวขาวกระจ่างใส','ทาทั่วใบหน้าเช้า-เย็น','2018/09/16',423,1),
-		('เข็มฉีดยา','เข็มสำหรับฉีดยาเข้าร่างกาย','ฉีดยาเข้าร่างกาย','2022/01/28',350,2) ,
-		('ครีมกันแดด','ป้องกันแสงแดด spf40 ','ทาบริเวณหน้าและลำคอ','2022/01/28',230,2)
+		('1','เซรั่มผิวขาว','เซรั่มผิวขาวซึมเข้าชั้นผิวง่าย ให้ผิวขาวกระจ่างใส','ทาทั่วใบหน้าเช้า-เย็น',1),
+		('2','เข็มฉีดยา','เข็มสำหรับฉีดยาเข้าร่างกาย','ฉีดยาเข้าร่างกาย',2) ,
+		('3','ครีมกันแดด','ป้องกันแสงแดด spf40 ','ทาบริเวณหน้าและลำคอ',3)
 go
 
 insert into [dbo].[Product]
-			([Product_Name],
+			([Product_Code],
+			[Product_Name],
 			[Product_Des],
 			[Product_Instruction],
 			[ProductType_Id])
 			
 		values
 		
-		('เซรั่มผิวขาว','เซรั่มผิวขาวซึมเข้าชั้นผิวง่าย ให้ผิวขาวกระจ่างใส','ทาทั่วใบหน้าเช้า-เย็น',1),
-		('เข็มฉีดยา','เข็มสำหรับฉีดยาเข้าร่างกาย','ฉีดยาเข้าร่างกาย',2) ,
-		('ครีมกันแดด','ป้องกันแสงแดด spf40 ','ทาบริเวณหน้าและลำคอ',2)
+		(123432,'เซรั่มผิวขาว','เซรั่มผิวขาวซึมเข้าชั้นผิวง่าย ให้ผิวขาวกระจ่างใส','ทาทั่วใบหน้าเช้า-เย็น',1),
+		(223423,'เข็มฉีดยา','เข็มสำหรับฉีดยาเข้าร่างกาย','ฉีดยาเข้าร่างกาย',2) ,
+		(389754,'ครีมกันแดด','ป้องกันแสงแดด spf40 ','ทาบริเวณหน้าและลำคอ',2)
 go
   
 select * from BranchProduct
@@ -196,9 +196,9 @@ select *from [dbo].[Product]
 select * from Course
 select * from Product
 select *from BranchProduct 
-
+delete  from BranchProduct
 insert into [dbo].[BranchProduct]
-			([BranchProduct_EXP],[Branch_Id],[Product_Id],
+			([BranchProduct_EXP],[Branch_Id],[Product_Code],
 			[BranchProduct_Amount],[Notifications_Amount1],[Notifications_Amount2],[Notifications_Amount3],[Notifications_Exp1],[Notifications_Exp2],[Notifications_Exp3])
 			
 		values

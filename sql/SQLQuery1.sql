@@ -15,7 +15,7 @@ CREATE TABLE dbo.Course
 CREATE TABLE dbo.CourseProduct
     (
     CourseProduct_Id   int           IDENTITY(1,1) PRIMARY KEY,
-	Product_Id int NULL,
+	Product_Code int NULL,
     Course_Id  int           NULL,
     );
 
@@ -40,7 +40,7 @@ CREATE TABLE dbo.BranchProduct
     BranchProduct_Id       int      IDENTITY(1,1) PRIMARY KEY,
 	BranchProduct_Amount int NULL,
 	BranchProduct_EXP date NULL,
-	Product_Id  int           NULL,
+	Product_Code  int           NULL,
 	Branch_Id  int           NULL,
 	Notifications_Exp1  int           NULL,
 	Notifications_Exp2  int           NULL,
@@ -77,7 +77,7 @@ CREATE TABLE dbo.ReqProduct
 	ReqDate			date NULL,
 	ReqQuantity		 int           NULL,
 	Branch_Id		 int           NULL,
-	Product_Id		 int           NULL,
+	Product_Code		 int           NULL,
 
     );
 
@@ -128,7 +128,8 @@ drop table dbo.Product
 create table[dbo].[Product]
 			
 			(Product_Id  int           IDENTITY(1,1) PRIMARY KEY,
-			Product_Name nvarchar(15) NULL,
+			Product_Code int ,
+			Product_Name nvarchar(15) ,
 			Product_Des nvarchar(300) NULL,
 			Product_Instruction nvarchar(300) NULL,
 			ProductType_Id int NULL)

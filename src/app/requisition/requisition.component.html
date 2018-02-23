@@ -4,15 +4,14 @@
   <mat-card>
     <h1>คำขอเบิกสินค้า</h1>
     <mat-form-field>
-        <mat-select placeholder="Favorite food">
-          <mat-option *ngFor="let food of foods" [value]="food.value">
-            {{ food.viewValue }}
-          </mat-option>
-        </mat-select>
-     
-          
-        </mat-form-field>
-        &nbsp;&nbsp;&nbsp;&nbsp;
+      <mat-select placeholder=" สาขา" [(ngModel)]="selectbranch" name="selectbranch"> 
+        <mat-option *ngFor="let branch of branchs" [value]="branch">
+          {{ branch.Branch_Name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    &nbsp;&nbsp;&nbsp;&nbsp;
     <!-- <div class="example-header"> -->
     <mat-form-field>
       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
@@ -21,47 +20,67 @@
     <i class="material-icons col-3">search</i>
     <div class="example-container mat-elevation-z8">
 
-      <mat-table [dataSource]="dataSource" matSort>
+      <mat-table [dataSource]="dataSource1" matSort>
 
+        <ng-container matColumnDef="ProductReq_Date">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> วันหมดอายุ </mat-header-cell>
+          <mat-cell *matCellDef="let Reqproducts"> {{Reqproducts.ReqDate | date:'dd/MM/yyyy' }} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="branch">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> สาขา </mat-header-cell>
+          <mat-cell *matCellDef="let Reqproducts"> {{Reqproducts.Branch_Name}} </mat-cell>
+        </ng-container>
         <!-- ID Column -->
-        <ng-container matColumnDef="id">
+        <ng-container matColumnDef="Product_Code">
           <mat-header-cell *matHeaderCellDef mat-sort-header> รหัสสินค้า </mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
+          <mat-cell *matCellDef="let Reqproducts"> {{Reqproducts.Product_Code}} </mat-cell>
         </ng-container>
 
         <!-- Name Column -->
-        <ng-container matColumnDef="name">
+        <ng-container matColumnDef="Product_Name">
           <mat-header-cell *matHeaderCellDef mat-sort-header> ชื่อสินค้า </mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
+          <mat-cell *matCellDef="let Reqproducts"> {{Reqproducts.Product_Name}} </mat-cell>
         </ng-container>
         <!-- Progress Column -->
-        <ng-container matColumnDef="progress">
+        <ng-container matColumnDef="req_Amount">
           <mat-header-cell *matHeaderCellDef mat-sort-header> จำนวนสินค้าที่ขอเบิก </mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{row.progress}}% </mat-cell>
+          <mat-cell *matCellDef="let Reqproducts"> {{Reqproducts.ReqQuantity}} </mat-cell>
         </ng-container>
+
+       
+
         <!-- Color Column -->
         <ng-container matColumnDef="check">
           <mat-header-cell *matHeaderCellDef mat-sort-header> การตรวจสอบ </mat-header-cell>
-          <mat-cell *matCellDef="let row" [style.color]="row.color"> <button class="ui inverted blue  button">ตรวจสอบ</button></mat-cell>
+          <mat-cell *matCellDef="let Reqproducts">
+            <button class="ui inverted blue  button" data-toggle="modal" data-target="#myModal" (click)="check(Reqproducts.Product_Code,Reqproducts.Product_Name )">ตรวจสอบ</button>
+          </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="amount">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> จำนวน </mat-header-cell>
-          <mat-cell *matCellDef="let row"> <div class="ui input" style="width:70%">
-            <input type="text"  placeholder="จำนวน" >
-          </div> </mat-cell>
+          <mat-header-cell *matHeaderCellDef mat-sort-header > จำนวน </mat-header-cell>
+          <mat-cell *matCellDef="let Reqproducts">
+            <div class="ui input" style="width:70%">
+              <input type="text" placeholder="จำนวน" [(ngModel)]="Reqproducts.amount" name="input_name">
+            </div>
+          </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="note">
           <mat-header-cell *matHeaderCellDef mat-sort-header> หมายเหตุ </mat-header-cell>
-          <mat-cell *matCellDef="let row"> <div class="ui input" style="width:70%">
-            <input type="text"  placeholder="หมายเหตุ" >
-          </div> </mat-cell>
+          <mat-cell *matCellDef="let Reqproducts">
+            <div class="ui input" style="width:70%">
+              <input type="text" placeholder="หมายเหตุ">
+            </div>
+          </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="button">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>  </mat-header-cell>
-          <mat-cell *matCellDef="let row">  <button class="ui inverted violet  button">สั่งจ่าย</button> </mat-cell>
+          <mat-header-cell *matHeaderCellDef mat-sort-header> </mat-header-cell>
+          <mat-cell *matCellDef="let Reqproducts">
+            <button class="ui inverted violet  button" (click)="supplyReq(Reqproducts.Product_Code ,Reqproducts.amount,Reqproducts.Branch_Id)">สั่งจ่าย</button>
+          </mat-cell>
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -73,5 +92,63 @@
     </div>
 
 
+
   </mat-card>
+  <div class="container">
+    <!-- Trigger the modal with a button -->
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">ตรวจสอบสินค้า</h4>
+          </div>
+          <div class="modal-body " >
+
+            <p>รหัสสินค้า {{pCode}}</p>
+            <p>ชื่อสินค้า {{pName}}</p>
+            <p  *ngFor="let data of reqAmount"> จำนวนสินค้าในคลัง {{data.BranchProduct_Amount}}</p>
+            <table class="ui celled table">
+              <thead>
+                <tr>
+                  <th>สาขา</th>
+                  <th>จำนวน</th>
+                  <th>วัน</th>
+
+              </thead>
+              <tbody>
+
+                <tr *ngFor="let data of reqCheck">
+                  <td>{{ data.Branch_Name }} </td>
+                  <td>{{ data.ReqQuantity }}</td>
+                  <td>{{ data.ReqDate }} </td>
+                </tr>
+
+              </tbody>
+
+            </table>
+            <!-- <table  class="ui selectable celled table w3-card">
+                    <thead>
+                      <td>สาขา</td>
+                      <td>จำนวน</td>
+                      <td>วันที่ขอเบิก</td>
+                    </thead> 
+                    <tbody>
+                    <tr *ngFor="let data of reqCheck">
+                      <td> {{ data.Branch_Name }} </td>
+                      <td> {{ data.ReqQuantity }} </td>
+                      <td> {{ data.ReqDate }} </td> 
+                    </tr> 
+                  </tbody>
+                  </table>  -->
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
