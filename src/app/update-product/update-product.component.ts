@@ -5,7 +5,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { UpdateService } from '../update-product/update-product.service';
 import { Http, Headers, RequestOptions, Response} from '@angular/http';
 import { Console } from '@angular/core/src/console';
-
+import { NumberOnlyDirective } from '../number.directive';
+import { FormsModule } from '@angular/forms';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-update-product',
@@ -28,8 +30,10 @@ typeproduct :any
     private router: Router,
     private UpdateService: UpdateService, private _http: Http) {
       this.route.params.subscribe(params => {
-        this.id=params.id;
-        console.log(params); 
+        
+        this.id = params.product.Product_Code;
+        this.name = params.productProduct_Name;
+        console.log("prams" + this.id + this.name); 
       });
   }
 

@@ -37,8 +37,30 @@ export class ProductService {
     .map( (response: Response) => <any>response.json() )   
     .do( x => console.log(x));
     
-    
-  
+  }
+  public update = (update_string, obj:any): Observable<any> => {
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({ headers: headers });
+    return this._http.put(this.actionUrl + "/Product/update/" + update_string, obj, options )
+    .map( (response: Response) => <any>response.json() )
+    .do( x => console.log(x));   
+  }
+  public getAllT = (): Observable<any[]> =>  {
+    return this._http.get(this.actionUrl + "/ProductTypes")
+    .map( (response: Response) => <any>response.json() )
+    .do( x => console.log(x));
+  }
+  public sp_insert_Product = (insert_p, obj:any): Observable<any> => {
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({ headers: headers });
+    return this._http.put(this.actionUrl + "/Product/insert/" + insert_p, obj, options )
+    .map( (response: Response) => <any>response.json() )
+    .do( x => console.log(x));
+  }
+  public getAllType = (): Observable<any[]> =>  {
+    return this._http.get(this.actionUrl + "/ProductTypes")
+    .map( (response: Response) => <any>response.json() )
+    .do( x => console.log(x));
   }
   
 }

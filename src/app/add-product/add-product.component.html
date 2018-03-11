@@ -2,12 +2,11 @@
 
 <h1 style="text-align:center">เพิ่มข้อมูลสินค้า</h1>
 
-
 <mat-card>
 
   <div class="example-container" style="text-align:center">
     <mat-form-field>
-      <input matInput placeholder="รหัสสินค้า" [formControl]="code" required [(ngModel)]="id">
+      <input matInput myNumberOnly name="min" placeholder="รหัสสินค้า" [formControl]="code" required [(ngModel)]="id">
      
     </mat-form-field>
     <br>
@@ -53,7 +52,7 @@
     </mat-form-field>
     <br>
     <mat-form-field>
-      <input matInput placeholder="จำนวน" [(ngModel)]="amount">
+      <input matInput myNumberOnly name="min" placeholder="จำนวน" [(ngModel)]="amount">
     </mat-form-field>
   </div>
   <br>

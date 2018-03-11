@@ -40,15 +40,15 @@
         </ng-container>
 
         <!-- Name Column -->
-        <ng-container matColumnDef="status">
+        <!-- <ng-container matColumnDef="status">
           <mat-header-cell  *matHeaderCellDef mat-sort-header > สถานะ </mat-header-cell>
           <mat-cell  *matCellDef="let reservation"> {{reservation.ReservationCourse_Status}} </mat-cell>
-        </ng-container>
+        </ng-container> -->
         <!-- Color Column -->
-        <ng-container matColumnDef="amount">
+        <!-- <ng-container matColumnDef="amount">
           <mat-header-cell *matHeaderCellDef mat-sort-header> จำนวน </mat-header-cell>
           <mat-cell *matCellDef="let reservation" > {{reservation}} </mat-cell>
-        </ng-container>
+        </ng-container> -->
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;">

@@ -1,0 +1,17 @@
+
+<style>
+        .mat-success{
+       background:hsl(123, 81%, 43%);
+       color: aliceblue;
+     }
+     </style>
+<div mat-dialog-content>
+        <br>
+      <p>คุณต้องการจ่ายสินค้า {{data.name}} เป็นจำนวน {{data.amount}}ให้แก่ {{data.branch}} </p>
+    <br>
+    </div>
+    <div mat-dialog-actions>
+      
+      <button mat-raised-button color="success" [mat-dialog-close]="data.name"  cdkFocusInitial (click)="supplyConfirm(data.code,data.amount,data.bid)">ยืนยัน</button>
+      <button mat-raised-button color="warn" (click)="onNoClick()" >ปิด</button>
+    </div>

@@ -86,14 +86,14 @@
         <ng-container matColumnDef="input_num">
           <mat-header-cell *matHeaderCellDef mat-sort-header > จำนวน </mat-header-cell>
           <mat-cell *matCellDef="let product"> <div class="ui input" style="width:70%">
-            <input type="text" placeholder="จำนวน" [(ngModel)]="product.amount" name="input_name">
-           
-          </div> </mat-cell>
+            <input type="text" placeholder="จำนวน" myNumberOnly name="min" [(ngModel)]="product.amount" name="input_name">
+             
+          </div> </mat-cell> 
         </ng-container>
 
         <ng-container matColumnDef="button">
           <mat-header-cell *matHeaderCellDef mat-sort-header>  </mat-header-cell>
-          <mat-cell *matCellDef="let product">  <button class="ui inverted violet  button"  (click)="supply(product.Product_Code,product.amount)">สั่งจ่าย</button> </mat-cell>
+          <mat-cell *matCellDef="let product">  <button class="ui inverted violet  button"  (click)="supply(product.Product_Code,product.amount,product.Product_Name)">สั่งจ่าย</button> </mat-cell>
         </ng-container>
 
         

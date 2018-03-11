@@ -33,7 +33,7 @@ export class ReservationComponent implements OnInit {
       error => console.log(error));
   }
 
-  displayedColumns = ['courseName', 'date', 'status', 'amount'];
+  displayedColumns = ['courseName', 'date'];
   // dataSource: MatTableDataSource<UserData>;
   dataSource = new ProductDataSource(this.ReservationService);
 

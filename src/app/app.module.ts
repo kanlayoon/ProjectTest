@@ -3,15 +3,18 @@ import { NgModule } from '@angular/core';
 import { NgSemanticModule } from 'ng-semantic';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule, ReactiveFormsModule,} from '@angular/forms';
+import {MomentModule} from 'angular2-moment/moment.module';
 import { HttpModule } from '@angular/http';
 // import {HttpClientModule} from '@angular/common/http';
 import { APP_BASE_HREF } from '@angular/common';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { Inject} from '@angular/core';
+import {MatDialog, MAT_DIALOG_DATA} from '@angular/material';
 import {MatButtonModule, MatCheckboxModule ,MatToolbarModule,MatTab, MatTabsModule, MatIconModule,
        MatMenuModule,MatCardModule,MatGridListModule
       ,MatOptionModule,MatSelectModule,MatAutocompleteModule,MatInputModule,MatTableModule,
       MatPaginatorModule,MatDatepickerModule,MatNativeDateModule,MatSort,MatSortModule,MatRadioModule,MatChipsModule
-    ,    MatDialogModule
+      ,MatDialogModule,
     } from '@angular/material';
 
 // import { MatFormFieldModule,MatFormField} from '@angular/material/form-field';
@@ -19,11 +22,12 @@ import {MatButtonModule, MatCheckboxModule ,MatToolbarModule,MatTab, MatTabsModu
 import { AppComponent } from './app.component';
 import { AppRoutingModule }     from './app-routing.module';
 import { LoginComponent }     from './login/login.component';
-import { HeaderComponent } from './header/header.component';
+import { HeaderComponent,DialogDataExampleDialog } from './header/header.component';
+
 import { DashboardHeadOfficeComponent } from './dashboard-head-office/dashboard-head-office.component';
-import { ProductComponent } from './product/product.component';
+import { ProductComponent,updateProductDialog ,confirm_updateDialog,addProductDialog,confirmAddPDialog,warnAddPDialog} from './product/product.component';
 import { AddProductComponent } from './add-product/add-product.component';
-import { SupplyComponent } from './supply/supply.component';
+import { SupplyComponent,check_branch_supplyDialog ,check_amount_supplyDialog,modal_confirm_supplyDialog} from './supply/supply.component';
 import { UpdateProductComponent } from './update-product/update-product.component';
 import { RequisitionComponent } from './requisition/requisition.component';
 import { NotificationComponent } from './notification/notification.component';
@@ -38,8 +42,16 @@ import { CheckCourseComponent } from './check-course/check-course.component';
 import { HeaderBranchComponent } from './header-branch/header-branch.component';
 import { NotificationBranchComponent } from './notification-branch/notification-branch.component';
 import { ReportBranchComponent } from './report-branch/report-branch.component';
+import { TypeProductComponent,ModalTypeProductDialog ,ModalTypeProductDelDialog} from './TypeProduct/TypeProduct.component';
 
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {enableProdMode} from '@angular/core';
+import { AlertComponent } from './directives/Alert.component';
+import { AuthGuard } from './guards/auth.guard';
+import { JwtInterceptor } from './helpers/jwt.interceptor';
+import { fakeBackendProvider } from './helpers/fake-backend';
+import { NumberOnlyDirective } from './number.directive';
+
 enableProdMode();
 
 // Service
@@ -50,7 +62,7 @@ import { SharedAuthService } from './services/shared-auth.service';
 import { TestComponent } from './test/test.component'
 import { TestApiService } from './services/testapi_services';
 import { ApiAuthService } from './services/api-auth.service'
-import { UserService} from './Services/user.service'
+import { UserService} from './services/user.service'
 import { ApiUrl } from './services/apiUrl.service';
 import { SupplyService } from './supply/supply.service';
 import {UpdateService} from './update-product/update-product.service'
@@ -62,11 +74,15 @@ import { UsingProductBService } from './usingproduct-branch/usingproductB.servic
 import { notificationService } from './notification/notification.service';
 import { ReservationService } from './reservation/reservation.service';
 import { HeaderService } from './header/header.service';
-
+import { AuthenticationService } from './services/Authentication.service';
+import { AlertService  } from './services/Alert.service';
+import { typeProductService  } from './TypeProduct/typeProduct.service';
 @NgModule({
   declarations: [ AppComponent, 
-                  LoginComponent, HeaderComponent, DashboardHeadOfficeComponent, ProductComponent, AddProductComponent, SupplyComponent, UpdateProductComponent, RequisitionComponent, NotificationComponent, ReportComponent, UsingproductComponent, DashboardBranchComponent, ProductBranchComponent, RequestComponent, UsingproductBranchComponent, ReservationComponent, CheckCourseComponent, HeaderBranchComponent, NotificationBranchComponent, ReportBranchComponent, TestComponent
-                  
+                  LoginComponent, HeaderComponent, DashboardHeadOfficeComponent, ProductComponent, AddProductComponent, SupplyComponent, UpdateProductComponent, RequisitionComponent, NotificationComponent, ReportComponent, UsingproductComponent, DashboardBranchComponent, ProductBranchComponent, RequestComponent, UsingproductBranchComponent, ReservationComponent, CheckCourseComponent, HeaderBranchComponent, NotificationBranchComponent, ReportBranchComponent, TestComponent,
+                  DialogDataExampleDialog,AlertComponent,TypeProductComponent,ModalTypeProductDialog,ModalTypeProductDelDialog,updateProductDialog
+                  ,NumberOnlyDirective,check_branch_supplyDialog,check_amount_supplyDialog,modal_confirm_supplyDialog,confirm_updateDialog,addProductDialog,
+                  confirmAddPDialog,warnAddPDialog,
                 ],
   imports: [  BrowserModule, 
               NgSemanticModule,
@@ -95,8 +111,11 @@ import { HeaderService } from './header/header.service';
             HttpModule,
             MatRadioModule,
             MatChipsModule,
+            MomentModule,
+            MatDialogModule,
+            HttpClientModule,
             
-            MatDialogModule
+            
         
   ],
   
@@ -107,7 +126,7 @@ import { HeaderService } from './header/header.service';
                 SharedAuthService,
                 TestApiService,
                 ApiAuthService,
-                UserService,
+                // UserService,
                 ProductService,
                 ApiUrl,
                 SupplyService,
@@ -119,7 +138,23 @@ import { HeaderService } from './header/header.service';
                notificationService,
                ReservationService,
                HeaderService,
+               AuthGuard,
+               AlertService,
+               AuthenticationService,
+               UserService,
+               typeProductService,
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: JwtInterceptor,
+            multi: true
+        },
+
+        // provider used to create fake backend
+        fakeBackendProvider
   ],
+entryComponents:[DialogDataExampleDialog,ModalTypeProductDialog,ModalTypeProductDelDialog,updateProductDialog,check_branch_supplyDialog
+,check_amount_supplyDialog,modal_confirm_supplyDialog,confirm_updateDialog,addProductDialog,confirmAddPDialog,warnAddPDialog]
+
 
 
 })

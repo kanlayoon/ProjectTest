@@ -1,0 +1,49 @@
+<h1 mat-dialog-title>แก้ไขข้อมูลสินค้า</h1>
+<div mat-dialog-content>
+  <!-- <p>What's your favorite animal?</p> -->
+  
+  <mat-form-field>
+        <input matInput myNumberOnly name="min" placeholder="รหัสสินค้า"  [(ngModel)]="data.code">
+        
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <input matInput placeholder="ชื่อสินค้า"  [(ngModel)]="data.name">
+      </mat-form-field>
+      <br>
+      <p>ประเภทสินค้าเดิม : {{data.type}} </p>
+      <mat-form-field>
+          <mat-select placeholder="ประเภทของสินค้า" [(ngModel)]="data.type" > 
+            <mat-option   *ngFor="let types of productTypes" [value]="data.type">
+              {{ types.ProductType_Name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker" placeholder="Choose a date"  [(ngModel)]="data.exp" id="p_exp">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+          <br>
+          <mat-form-field>
+              <input matInput placeholder="คำอธิบาย"  [(ngModel)]="data.des">
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <input matInput placeholder="วิธีใช้"  [(ngModel)]="data.ins">
+              </mat-form-field>
+              <br>
+                <mat-form-field>
+                  <input matInput myNumberOnly name="min" placeholder="จำนวนสินค้า"  [(ngModel)]="data.amount">
+                  
+                </mat-form-field>
+               
+                <br>
+                <div mat-dialog-actions> 
+                    <button mat-raised-button color="warn" [mat-dialog-close]="data" cdkFocusInitial >ตกลง</button>
+                    <button  mat-raised-button color="success" (click)="onNoClick()">ยกเลิก</button>
+                   
+                  </div>
+
+</div>

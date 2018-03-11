@@ -1,0 +1,17 @@
+<style>
+    .mat-success{
+   background:hsl(123, 81%, 43%);
+   color: aliceblue;
+ }
+ </style>
+<h1 mat-dialog-title>ประเภทสินค้า</h1>
+<div mat-dialog-content>
+ 
+ คุณต้องการลบประเภทสินค้า {{data.name}}
+</div>
+<div mat-dialog-actions>
+  <!-- <button mat-button [mat-dialog-close]="data.name" cdkFocusInitial >ตกลง</button> -->
+  <button mat-raised-button color="success"[mat-dialog-close]="data.name" cdkFocusInitial (click)="del(data.id)" >ตกลง</button>
+  <button mat-raised-button color="warn" (click)="onNoClick()">ยกเลิก</button>
+</div>
+ 

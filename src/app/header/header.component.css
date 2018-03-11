@@ -12,6 +12,9 @@
   background-color: rgba(0, 128, 0, 0);
   color: rgb(255, 251, 251);
 }
+/* .mat-aaa{
+  background:#550000;
+} */
 .imageDiv
     {
         margin-left: 100px;
@@ -34,3 +37,7 @@
     position:relative;
    }
 
+.mat-dialog-container {
+  background: #f7f5f5;
+  color: rgba(0,0,0,.87);
+}

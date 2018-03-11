@@ -1,0 +1,16 @@
+<style>
+        .mat-success{
+       background:hsl(123, 81%, 43%);
+       color: aliceblue;
+     }
+     </style>
+    <h1 mat-dialog-title>แก้ไขสินค้า</h1>
+    <div mat-dialog-content>
+     
+     คุณต้องการแก้ไขสินค้า {{data.name}} <br>
+    </div>
+    <div mat-dialog-actions>
+      <!-- <button mat-button [mat-dialog-close]="data.name" cdkFocusInitial >ตกลง</button> -->
+      <button mat-raised-button color="success"[mat-dialog-close]="data.name" cdkFocusInitial (click)="update(data.code,data.name,data.exp,data.type,data.des,data.ins,data.amount)" >ยืนยัน</button>
+      <button mat-raised-button color="warn" (click)="onNoClick()">ยกเลิก</button>
+    </div>

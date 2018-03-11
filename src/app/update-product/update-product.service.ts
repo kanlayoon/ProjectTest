@@ -27,6 +27,7 @@ export class UpdateService {
     .map( (response: Response) => <any>response.json() )
     .do( x => console.log(x));
   }
+  
 
 }
 

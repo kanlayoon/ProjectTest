@@ -35,7 +35,7 @@
              <ng-container matColumnDef="noti1">
               <mat-header-cell *matHeaderCellDef mat-sort-header> การเตือนระดับที่ 1 </mat-header-cell>
               <mat-cell *matCellDef="let product"> <div class="ui input" >
-                <input type="text"  placeholder={{product.Notifications_Amount1}} [(ngModel)]="product.noti1"  >
+                <input type="text" myNumberOnly name="min" placeholder={{product.Notifications_Amount1}} [(ngModel)]="product.noti1"  >
               </div> </mat-cell>
             </ng-container>
         
@@ -43,14 +43,14 @@
             <ng-container matColumnDef="noti2">
               <mat-header-cell *matHeaderCellDef mat-sort-header> การเตือนระดับที่ 2 </mat-header-cell>
               <mat-cell *matCellDef="let product"> <div class="ui input" >
-                <input type="text"  placeholder={{product.Notifications_Amount2}} [(ngModel)]="product.noti2" >
+                <input type="text" myNumberOnly name="min" placeholder={{product.Notifications_Amount2}} [(ngModel)]="product.noti2" >
               </div> </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="noti3">
               <mat-header-cell *matHeaderCellDef mat-sort-header> การเตือนระดับที่ 3 </mat-header-cell>
               <mat-cell *matCellDef="let product">  <div class="ui input" >
-                <input type="text"  placeholder={{product.Notifications_Amount3}} [(ngModel)]="product.noti3" >
+                <input type="text" myNumberOnly name="min" placeholder={{product.Notifications_Amount3}} [(ngModel)]="product.noti3" >
               </div> </mat-cell>
             </ng-container>
 
@@ -100,7 +100,7 @@
              <ng-container matColumnDef="notiExp1">
               <mat-header-cell *matHeaderCellDef mat-sort-header> การเตือนระดับที่ 1 </mat-header-cell>
               <mat-cell *matCellDef="let product"> <div class="ui input">
-                <input type="text"  placeholder="{{product.Notifications_Exp1}} วัน" [(ngModel)]="product.notiExp1" > 
+                <input type="text" myNumberOnly name="min" placeholder="{{product.Notifications_Exp1}} วัน" [(ngModel)]="product.notiExp1" > 
               </div> </mat-cell>
             </ng-container>
         
@@ -108,14 +108,14 @@
             <ng-container matColumnDef="notiExp2">
               <mat-header-cell *matHeaderCellDef mat-sort-header> การเตือนระดับที่ 2 </mat-header-cell>
               <mat-cell *matCellDef="let product"> <div class="ui input" >
-                <input type="text"  placeholder="{{product.Notifications_Exp2}} วัน " [(ngModel)]="product.notiExp2">
+                <input type="text" myNumberOnly name="min" placeholder="{{product.Notifications_Exp2}} วัน " [(ngModel)]="product.notiExp2">
               </div> </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="notiExp3">
               <mat-header-cell *matHeaderCellDef mat-sort-header> การเตือนระดับที่ 3 </mat-header-cell>
               <mat-cell *matCellDef="let product">  <div class="ui input" >
-                <input type="text"  placeholder="{{product.Notifications_Exp3}} วัน " [(ngModel)]="product.notiExp3" >
+                <input type="text" myNumberOnly name="min" placeholder="{{product.Notifications_Exp3}} วัน " [(ngModel)]="product.notiExp3" >
               </div> </mat-cell>
             </ng-container>
 

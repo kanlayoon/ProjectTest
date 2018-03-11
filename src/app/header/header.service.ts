@@ -15,7 +15,7 @@ export class HeaderService {
     this.actionUrl = apiUrl.ApiServer;
   }
 
-  public getAll = (): Observable<any> =>  {
+  public getAll = (): Observable<any[]> =>  {
     return this._http.get(this.actionUrl + "/BranchProduct/id2/1")
     .map( (response: Response) => <any>response.json() )
     .do( x => console.log(x));

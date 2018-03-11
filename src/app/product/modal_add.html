@@ -1,0 +1,48 @@
+
+
+<mat-card>
+    <h1 style="text-align:center">เพิ่มข้อมูลสินค้า</h1>
+  <div class="example-container" style="text-align:center">
+    <mat-form-field>
+      <input matInput myNumberOnly name="min" placeholder="รหัสสินค้า" [formControl]="code" required [(ngModel)]="data.id_add">
+     
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input matInput placeholder="ชื่อสินค้า" [formControl]="namep" required [(ngModel)]="data.name_add">
+      <!-- <input matInput placeholder="ชื่อสินค้า"> -->
+    </mat-form-field>
+    <br>
+      <mat-form-field>
+        <mat-select placeholder="ประเภทสินค้า" [(ngModel)]="data.typeproduct_add" name="typeproduct_add">
+          <mat-option *ngFor="let type of productTypes_add" [value]="type">{{ type.ProductType_Name }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="data.date_add"  >
+      <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+
+    <br>
+    <mat-form-field>
+      <textarea matInput placeholder="คำอธิบาย" [(ngModel)]="data.des_add"></textarea>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <textarea matInput placeholder="วิธีใช้" [(ngModel)]="data.ins_add"></textarea>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input matInput myNumberOnly name="min" placeholder="จำนวน" [(ngModel)]="data.amount_add">
+    </mat-form-field>
+  </div>
+  <br>
+  <button mat-raised-button color="primary" [mat-dialog-close]="data" cdkFocusInitial  >เพิ่มสินค้า</button>
+  <button mat-raised-button color="warn" (click)="onNoClick()">ยกเลิก</button>
+
+</mat-card>
+
+

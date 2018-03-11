@@ -1,0 +1,19 @@
+<style>
+    .mat-success{
+   background:hsl(123, 81%, 43%);
+   color: aliceblue;
+ }
+ </style>
+<h1 mat-dialog-title>แก้ไขประเภทสินค้า</h1>
+<div mat-dialog-content>
+ 
+  <mat-form-field>
+    <input matInput placeholder="ประเภทสินค้า"  [(ngModel)]="data.name">
+    <!-- <input type="text"  placeholder="{{data.name}}" [(ngModel)]="data.newType" >  -->
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <!-- <button mat-button [mat-dialog-close]="data.name" cdkFocusInitial >ตกลง</button> -->
+  <button mat-raised-button color="success"[mat-dialog-close]="data.name" cdkFocusInitial  data-toggle="modal"  data-target="#myModalUpdate" >ตกลง</button>
+  <button mat-raised-button color="warn" (click)="onNoClick()">ยกเลิก</button>
+</div>

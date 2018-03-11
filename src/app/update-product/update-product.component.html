@@ -1,13 +1,12 @@
 <app-header></app-header>
-<h1 style="text-align:center">แก้ไขข้อมูลสินค้า</h1>
-
-<body>
-
-  <mat-card>
-
+<mat-card>
     <div class="example-container">
+        
+            <h1 style="text-align:center">แก้ไขข้อมูลสินค้า</h1>
+            <!-- <input myNumberOnly name="min" placeholder="Enter Value" [(ngModel)]="my"><br> -->
       <mat-form-field>
-        <input matInput placeholder="รหัสสินค้า" type="number" id="idp" [(ngModel)]="idp">
+        <input matInput myNumberOnly name="min" placeholder="Enter Value"  placeholder="รหัสสินค้า" type="number" id="idp" [(ngModel)]="id">
+       
       </mat-form-field>
       <br>
       <mat-form-field>
@@ -16,7 +15,7 @@
       <br>
 
       <mat-form-field>
-        <mat-select placeholder=" ประเภทสินค้า" [(ngModel)]="typeproduct" name="typeproduct"> 
+        <mat-select placeholder=" ประเภทสินค้า" [(ngModel)]="product.ProductType_Name" name="typeproduct"> 
           <mat-option *ngFor="let type of productTypes" [value]="type">
             {{ type.ProductType_Name }}
           </mat-option>
@@ -37,14 +36,12 @@
         <textarea matInput placeholder="วิธีใช้" id="ins" [(ngModel)]="ins"></textarea>
       </mat-form-field>
 
+ <button class="ui inverted orange  button" (click)="save()">Update</button>
 
-
+  
 
     </div>
-
-    <button class="ui inverted orange  button" (click)="save()">Update</button>
-
-  </mat-card>
+</mat-card>
 
 
-</body>
+

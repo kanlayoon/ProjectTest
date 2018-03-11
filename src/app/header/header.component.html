@@ -16,37 +16,12 @@
   <span class="example-spacer"></span>
   
 
-  <i class="material-icons" [matMenuTriggerFor]="menu"role="img" aria-hidden="true" >notifications </i>
-   
-  <div *ngIf = "noti1">
+  <i class="material-icons" aria-hidden="true" >notifications </i> 
+  <div *ngIf = "notifications">
     <mat-chip-list>
-        <mat-chip  color="warn" selected="true"  [matMenuTriggerFor]="menu" role="img" aria-hidden="true"> 1</mat-chip>
-        <mat-menu #menu="matMenu">
-            <button mat-menu-item > {{products.Product_Name}}</button>
-            <button mat-menu-item> ระดับที่ 1 สินค้าในคลังใกล้หมดขั้นวิกฤต</button>
-          </mat-menu>
+        <mat-chip  color="warn" selected="true"  (click)="openDialog()"  aria-hidden="true"> {{Number_count}} </mat-chip>
   </mat-chip-list>
 </div>
-<div *ngIf = "noti2">
-  <mat-chip-list>
-      <mat-chip  color="warn" selected="true"  [matMenuTriggerFor]="menu" role="img" aria-hidden="true"> 1</mat-chip>
-      <mat-menu #menu="matMenu">
-          <button mat-menu-item > {{products.Product_Name}}</button>
-          <button mat-menu-item> ระดับที่ 2 สินค้าในคลังใกล้หมดขั้นวิกฤต</button>
-        </mat-menu>
-</mat-chip-list>
-</div>
-<div *ngIf = "noti3">
-  <mat-chip-list>
-  <mat-chip  color="warn" selected="true"  [matMenuTriggerFor]="menu" role="img" aria-hidden="true"> 1</mat-chip>
-  <mat-menu #menu="matMenu">
-      <button mat-menu-item > {{products.Product_Name}}</button>
-      <button mat-menu-item> ระดับที่ 3 สินค้าในคลังใกล้หมดขั้นวิกฤต</button>
-    </mat-menu>
-</mat-chip-list>
-</div>
- 
-  
   <mat-icon [matMenuTriggerFor]="menu" role="img" aria-hidden="true">person</mat-icon>
   <mat-menu #menu="matMenu">
     <button mat-menu-item>Profile</button>

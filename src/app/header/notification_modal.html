@@ -1,0 +1,120 @@
+<h1 mat-dialog-title>Notifications !!!</h1>
+<div mat-dialog-content>  
+  
+    <div  *ngFor="let noti of data.push_noti; let i = index" >
+            
+        <div *ngIf = " data.push_status[i] ===1">
+                <div class="ui middle aligned divided list">
+                        <div class="item">
+                          
+                          <img class="ui avatar image" src="../assets/img/yellow.png">
+                          <div class="content">
+                                <div class="header">สินค้าใกล้หมด เตือนระดับที่ 1</div>
+                                รหัสสินค้า : {{noti.Product_Code}}<br>
+                                ชื่อสินค้า : {{noti.Product_Name}}<br>
+                                จำนวนสินค้าคงเหลือ : {{noti.BranchProduct_Amount}}
+                              </div>
+                        </div>
+                        
+                        
+                        
+                      </div>
+                      
+            
+        </div>
+        <div *ngIf = " data.push_status[i] ===2">
+                <div class="ui middle aligned divided list">
+                        <div class="item">
+                          
+                          <img class="ui avatar image" src="../assets/img/orange.png">
+                          <div class="content">
+                                <div class="header">สินค้าใกล้หมด เตือนระดับที่ 2</div>
+                                รหัสสินค้า : {{noti.Product_Code}}<br>
+                                ชื่อสินค้า : {{noti.Product_Name}}<br>
+                                จำนวนสินค้าคงเหลือ : {{noti.BranchProduct_Amount}}
+                              </div>
+                        </div>
+                        
+                        
+                        
+                      </div>
+               
+            </div>
+            <div *ngIf = " data.push_status[i] ===3">
+                <mat-card>
+                    <div class="ui middle aligned divided list">
+                            <div class="item">
+                              
+                              <img class="ui avatar image" src="../assets/img/red.png">
+                              <div class="content">
+                                    <div class="header">สินค้าใกล้หมด เตือนระดับที่ 3</div>
+                                    รหัสสินค้า : {{noti.Product_Code}}<br>
+                                    ชื่อสินค้า : {{noti.Product_Name}}<br>
+                                    จำนวนสินค้าคงเหลือ : {{noti.BranchProduct_Amount}}
+                                  </div>
+                            </div>
+                            
+                            
+                            
+                          </div>
+                   </mat-card>
+                   <br>
+                   
+                </div>
+                <div *ngIf = " data.push_status[i] ===4">
+                    <mat-card>
+                        <div class="ui middle aligned divided list">
+                                <div class="item">
+                                  
+                                  <img class="ui avatar image" src="../assets/img/yellow.png">
+                                  <div class="content">
+                                        <div class="header">สินค้าใกล้หมดอายุ เตือนระดับที่ 1</div>
+                                        รหัสสินค้า : {{noti.Product_Code}}<br>
+                                        ชื่อสินค้า : {{noti.Product_Name}}<br>
+                                        วันหมดอายุ : {{noti.BranchProduct_EXP}}
+                                      </div>
+                                </div>
+                                
+                                
+                                
+                              </div>
+                       </mat-card>
+                       <br>
+                    </div>
+                    <div *ngIf = " data.push_status[i] ===5">
+                            <div class="ui middle aligned divided list">
+                                    <div class="item">
+                                      
+                                      <img class="ui avatar image" src="../assets/img/orange.png">
+                                      <div class="content">
+                                            <div class="header">สินค้าใกล้หมดอายุ เตือนระดับที่ 2</div>
+                                            รหัสสินค้า : {{noti.Product_Code}}<br>
+                                            ชื่อสินค้า : {{noti.Product_Name}}<br>
+                                            วันหมดอายุ : {{noti.BranchProduct_EXP}}
+                                          </div>
+                                    </div>
+                                    
+                                    
+                                    
+                                  </div>
+                        </div>
+                        <div *ngIf = " data.push_status[i] ===6">
+                                <div class="ui middle aligned divided list">
+                                        <div class="item">
+                                          
+                                          <img class="ui avatar image" src="../assets/img/red.png">
+                                          <div class="content">
+                                                <div class="header">สินค้าใกล้หมดอายุ เตือนระดับที่ 3</div>
+                                                รหัสสินค้า : {{noti.Product_Code}}<br>
+                                                ชื่อสินค้า : {{noti.Product_Name}}<br>
+                                                วันหมดอายุ : {{noti.BranchProduct_EXP}}
+                                              </div>
+                                        </div>
+                                        
+                                        
+                                        
+                                      </div>
+                            </div>
+                        </div>
+ 
+</div>

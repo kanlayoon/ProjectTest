@@ -23,6 +23,7 @@ import { ReservationComponent }      from './reservation/reservation.component';
 import { UsingproductBranchComponent }      from './usingproduct-branch/usingproduct-branch.component';
 import { CheckCourseComponent }      from './check-course/check-course.component';
 import { HeaderBranchComponent }      from './header-branch/header-branch.component';
+import { TypeProductComponent }      from './TypeProduct/TypeProduct.component';
 //service
 import { ModuleWithProviders } from '@angular/core';
 
@@ -49,7 +50,8 @@ const routes: Routes = [
     { path: 'using-product-branch', component: UsingproductBranchComponent},
     { path: 'check-course', component: CheckCourseComponent},
     { path: 'header-branch', component: HeaderBranchComponent},
-    { path: 'update-product/:id', component: UpdateProductComponent } 
+    { path: 'update-product/:id', component: UpdateProductComponent } ,
+    { path: 'type-product', component: TypeProductComponent},
      
 ];
 
