@@ -4,9 +4,9 @@
     <mat-card>
     <h1>ออกรายงาน</h1>
     <mat-form-field>
-        <mat-select placeholder="รายงานการสั่งจ่าย">
-          <mat-option *ngFor="let food of foods" [value]="food.value">
-            {{ food.viewValue }}
+        <mat-select placeholder="รายงานการสั่งจ่าย" [(ngModel)]="X">
+          <mat-option *ngFor="let report of reports"  [value]="report.value">
+            {{ report.viewValue }}
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -27,10 +27,40 @@
         <button class="ui inverted blue button"><i class="material-icons ">search</i></button>
         
         <br>
-        
-          
-          <mat-card>
+        <div *ngIf="X==='1'">
+          <div class="container">
+              sup
+          </div>
+        </div>
 
+        <div *ngIf="X==='2'">
+          <div class="container">
+              use
+          </div>
+        </div>
+
+        <div *ngIf="X==='3'">
+          <div class="container">
+              req
+          </div>
+        </div>
+
+        <div *ngIf="X==='4'">
+          <div class="container">
+              reservation
+          </div>
+        </div>
+
+          <mat-card>
+            
+            <div style="display: block">
+              <canvas baseChart
+                      [data]="pieChartData"
+                      [labels]="pieChartLabels"
+                      [chartType]="pieChartType"
+                      (chartHover)="chartHovered($event)"
+                      (chartClick)="chartClicked($event)"></canvas>
+            </div>
 
           </mat-card>
           <button class="ui inverted blue button">Export</button>

@@ -32,6 +32,15 @@ export class UsingProductBService {
     .map( (response: Response) => <any>response.json() )
     .do( x => console.log(x));
   }
-
+  public getCourseProduct = (id_c:any): Observable<any[]> =>  {
+    return this._http.get(this.actionUrl + "/CourseProduct/" + id_c)
+    .map( (response: Response) => <any>response.json() )
+    .do( x => console.log(x));
+  }
+  public getKey = (): Observable<any[]> =>  {
+    return this._http.get(this.actionUrl + "/getKey") 
+    .map( (response: Response) => <any>response.json() )
+    .do( x => console.log(x));
+  }
 }
 

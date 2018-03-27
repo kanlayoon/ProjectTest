@@ -25,6 +25,8 @@ export class State {
 })
 
 export class RequisitionComponent implements OnInit {
+
+  dataSource1: MatTableDataSource<{}>;
   constructor(private RequisitionService: RequisitionService, private _http: Http) { }
   Reqproducts: any;
   reqCheck: any;
@@ -47,10 +49,13 @@ export class RequisitionComponent implements OnInit {
 
     this.RequisitionService.get_AllReq().subscribe(data => {
       this.Reqproducts = data;
+      this.dataSource1 = new MatTableDataSource(this.Reqproducts);
       console.log(data);
       console.log("get all req complitse")
     }, error => console.log(error));
+    
   }
+  
   supplyReq(Pcode,amount,Branch_Id): void{
     console.log("Fsupply");
   console.log("amount"+ amount);
@@ -105,8 +110,16 @@ export class RequisitionComponent implements OnInit {
 
   displayedColumns = ['ProductReq_Date', 'branch', 'Product_Code', 'Product_Name','req_Amount', 'check', 'amount', 'note', 'button'];
   displayedColumns2 = ['branch', 'amount', 'date'];
-  dataSource1 = new requisitionDataSource(this.RequisitionService);
-  
+  dataSource = new requisitionDataSource(this.RequisitionService);
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    filterValue = filterValue.toUpperCase();
+    filterValue = filterValue.toString();
+    this.dataSource1.filter = filterValue;
+    console.log("filterrrrrrrrrrrrrrrr");
+    console.log(filterValue);
+  }
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 }

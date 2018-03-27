@@ -18,8 +18,10 @@ export class State {
   styleUrls: ['./product-branch.component.css']
 })
 export class ProductBranchComponent implements OnInit {
+  dataSource1: MatTableDataSource<any>;
   product: any;
   idp:any;
+  idb:any;
   private productList: Product[];
   constructor( private route: ActivatedRoute,
     private router: Router,
@@ -28,50 +30,40 @@ export class ProductBranchComponent implements OnInit {
   }
   public products: any[];
   ngOnInit() {
+    this.idb = 3;
+    this.productService.getAll(this.idb).subscribe(data => {
+      this.products = data;
+      console.log(data)
+      this.dataSource1 = new MatTableDataSource(this.products);
+    },
+      error => console.log(error));
   }
 
   myControl: FormControl = new FormControl();
-  foods = [
-    { value: 'steak-0', viewValue: 'Steak' },
-    { value: 'pizza-1', viewValue: 'Pizza' },
-    { value: 'tacos-2', viewValue: 'Tacos' }
-  ];
-
- 
 
   displayedColumns = ['Product_Code', 'Product_Name', 'ProductType_Name', 'BranchProduct_EXP', 'Product_Des', 'Product_Instruction', 'BranchProduct_Amount'];
-  // dataSource: MatTableDataSource<UserData>;
+ 
   dataSource = new ProductDataSource(this.productService);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  
-  /**
-   * Set the paginator and sort after the view init since this component will
-   * be able to query its view for the initialized paginator and sort.
-   */
-  // ngAfterViewInit() {
-  //   this.dataSource.paginator = this.paginator;
-  //   this.dataSource.sort = this.sort;
-  // }
-
-  // applyFilter(filterValue: string) {
-  //   filterValue = filterValue.trim(); // Remove whitespace
-  //   filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
-  //   this.dataSource.filter = filterValue;
-  // }
-
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
+    this.dataSource1.filter = filterValue;
+  }
 }
 
-
-
-  export class ProductDataSource extends DataSource<any> {
+export class ProductDataSource extends DataSource<any> {
+  idb :any; 
     constructor(private productService: ProductService) {
+      
       super();
     }
     connect(): Observable<Product[]> {
-      return this.productService.getAll();
+      this.idb = 3;
+      return this.productService.getAll(this.idb);
     }
     disconnect() { }
   }

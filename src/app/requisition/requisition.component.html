@@ -23,7 +23,7 @@
       <mat-table [dataSource]="dataSource1" matSort>
 
         <ng-container matColumnDef="ProductReq_Date">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> วันหมดอายุ </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef mat-sort-header> วันหมดอายุ(วว/ดด/ปปปป) </mat-header-cell>
           <mat-cell *matCellDef="let Reqproducts"> {{Reqproducts.ReqDate | date:'dd/MM/yyyy' }} </mat-cell>
         </ng-container>
 
@@ -114,7 +114,7 @@
                 <tr>
                   <th>สาขา</th>
                   <th>จำนวน</th>
-                  <th>วัน</th>
+                  <th>วัน (วว/ดด/ปปปป)</th>
 
               </thead>
               <tbody>
@@ -122,7 +122,7 @@
                 <tr *ngFor="let data of reqCheck">
                   <td>{{ data.Branch_Name }} </td>
                   <td>{{ data.ReqQuantity }}</td>
-                  <td>{{ data.ReqDate }} </td>
+                  <td>{{ data.ReqDate |date: 'dd/MM/yyyy' }} </td>
                 </tr>
 
               </tbody>

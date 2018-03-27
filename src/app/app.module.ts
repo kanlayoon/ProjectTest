@@ -46,25 +46,27 @@ import { TypeProductComponent,ModalTypeProductDialog ,ModalTypeProductDelDialog}
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {enableProdMode} from '@angular/core';
-import { AlertComponent } from './directives/Alert.component';
-import { AuthGuard } from './guards/auth.guard';
-import { JwtInterceptor } from './helpers/jwt.interceptor';
-import { fakeBackendProvider } from './helpers/fake-backend';
+import { AlertComponent } from './login/_directives/Alert.component';
+import { AuthGuard } from './login/_guards/index';
+import { JwtInterceptor } from './login/_helpers/jwt.interceptor';
+import { fakeBackendProvider } from './login/_helpers/fake-backend';
 import { NumberOnlyDirective } from './number.directive';
+import { ChartsModule } from 'ng2-charts';
 
 enableProdMode();
 
 // Service
-import { ApiService } from './services/api.service';
-import { ProxyConfigService } from './services/proxy.config.service';
+import { ApiService } from './login/shared/api/api.service';
+import { ProxyConfigService } from './login/shared/helpers/proxy.config.service';
 import { ProductService } from './product/product.service';
-import { SharedAuthService } from './services/shared-auth.service';
+import { SharedAuthService } from './login/shared/helpers/shared-auth.service';
 import { TestComponent } from './test/test.component'
 import { TestApiService } from './services/testapi_services';
-import { ApiAuthService } from './services/api-auth.service'
-import { UserService} from './services/user.service'
+import { ApiAuthService } from './login/shared/api/api-auth.service';
+import { AuthService } from './login/shared/api/auth.service'
+import { UserService} from './login/_services/index';
 import { ApiUrl } from './services/apiUrl.service';
-import { SupplyService } from './supply/supply.service';
+import { SupplyService } from './supply/supply.service'; 
 import {UpdateService} from './update-product/update-product.service'
 import { NgModel } from '@angular/forms/src/directives/ng_model';
 import {AddProductTypeService} from './add-product/add-productType.service'
@@ -74,15 +76,17 @@ import { UsingProductBService } from './usingproduct-branch/usingproductB.servic
 import { notificationService } from './notification/notification.service';
 import { ReservationService } from './reservation/reservation.service';
 import { HeaderService } from './header/header.service';
-import { AuthenticationService } from './services/Authentication.service';
-import { AlertService  } from './services/Alert.service';
+import { AuthenticationService } from './login/_services/index';
+import { AlertService  } from './login/_services/index';
 import { typeProductService  } from './TypeProduct/typeProduct.service';
+import { AppConfig } from './app.config';
+
 @NgModule({
   declarations: [ AppComponent, 
                   LoginComponent, HeaderComponent, DashboardHeadOfficeComponent, ProductComponent, AddProductComponent, SupplyComponent, UpdateProductComponent, RequisitionComponent, NotificationComponent, ReportComponent, UsingproductComponent, DashboardBranchComponent, ProductBranchComponent, RequestComponent, UsingproductBranchComponent, ReservationComponent, CheckCourseComponent, HeaderBranchComponent, NotificationBranchComponent, ReportBranchComponent, TestComponent,
                   DialogDataExampleDialog,AlertComponent,TypeProductComponent,ModalTypeProductDialog,ModalTypeProductDelDialog,updateProductDialog
                   ,NumberOnlyDirective,check_branch_supplyDialog,check_amount_supplyDialog,modal_confirm_supplyDialog,confirm_updateDialog,addProductDialog,
-                  confirmAddPDialog,warnAddPDialog,
+                  confirmAddPDialog,warnAddPDialog,AlertComponent
                 ],
   imports: [  BrowserModule, 
               NgSemanticModule,
@@ -114,7 +118,7 @@ import { typeProductService  } from './TypeProduct/typeProduct.service';
             MomentModule,
             MatDialogModule,
             HttpClientModule,
-            
+            ChartsModule,
             
         
   ],
@@ -143,14 +147,18 @@ import { typeProductService  } from './TypeProduct/typeProduct.service';
                AuthenticationService,
                UserService,
                typeProductService,
+               AppConfig,
+               AuthService,
+               
         {
             provide: HTTP_INTERCEPTORS,
             useClass: JwtInterceptor,
             multi: true
         },
+       
 
         // provider used to create fake backend
-        fakeBackendProvider
+        fakeBackendProvider,
   ],
 entryComponents:[DialogDataExampleDialog,ModalTypeProductDialog,ModalTypeProductDelDialog,updateProductDialog,check_branch_supplyDialog
 ,check_amount_supplyDialog,modal_confirm_supplyDialog,confirm_updateDialog,addProductDialog,confirmAddPDialog,warnAddPDialog]

@@ -57,16 +57,23 @@ CREATE TABLE dbo.BranchProduct
 CREATE TABLE dbo.UseProduct
     (
     UseProduct_Id       int      IDENTITY(1,1) PRIMARY KEY,
-	TypeUse				bit		NULL,
 	UseDate				 date	NULL,
 	UseQuantity		  int           NULL,
+	use_key   int  NULL,
+	Product_Code	int    NULL,
 	Branch_Id		 int           NULL,
-	Product_Id		 int           NULL,
 	Course_Id		 int           NULL,
 	
-	
+    );
+
+	CREATE TABLE dbo.Use_Course
+    (
+    Use_Course_Id       int      IDENTITY(1,1) PRIMARY KEY,
+	Branch_Id		 int           NULL,
+	Course_Id		 int           NULL,
 	
     );
+
 
 
 	IF ( SELECT object_id('dbo.ReqProduct') ) > 0

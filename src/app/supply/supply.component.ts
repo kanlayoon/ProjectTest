@@ -18,6 +18,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
   templateUrl: './supply.component.html',
 })
 export class SupplyComponent implements OnInit {
+  dataSource1: MatTableDataSource<any>;
   product: any;
   code: any;
 
@@ -81,7 +82,7 @@ export class SupplyComponent implements OnInit {
     this.supplyService.getAll().subscribe(data => {
       this.products = data;
       console.log(data);
-
+      this.dataSource1 = new MatTableDataSource(this.products);
     },
       error => console.log(error));
 
@@ -91,9 +92,15 @@ export class SupplyComponent implements OnInit {
   // dataSource: MatTableDataSource<UserData>;
   dataSource = new ProductDataSource(this.supplyService);
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
-
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    filterValue = filterValue.toUpperCase();
+    filterValue = filterValue.toString();
+    this.dataSource1.filter = filterValue;
+    console.log("filterrrrrrrrrrrrrrrr");
+    console.log(filterValue);
+  }
 
   supply(pCode, amount,name,bname): void {
     console.log("Fsupply");

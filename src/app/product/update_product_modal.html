@@ -11,17 +11,17 @@
         <input matInput placeholder="ชื่อสินค้า"  [(ngModel)]="data.name">
       </mat-form-field>
       <br>
-      <p>ประเภทสินค้าเดิม : {{data.type}} </p>
+      <p>ประเภทสินค้าเดิม : {{data.types}} </p>
       <mat-form-field>
-          <mat-select placeholder="ประเภทของสินค้า" [(ngModel)]="data.type" > 
-            <mat-option   *ngFor="let types of productTypes" [value]="data.type">
-              {{ types.ProductType_Name }}
+          <mat-select placeholder="ประเภทของสินค้า" [(ngModel)]="data.typeup" > 
+            <mat-option   *ngFor="let typeup of productTypes" [value]="typeup.ProductType_Id">
+              {{ typeup.ProductType_Name }}
             </mat-option>
           </mat-select>
         </mat-form-field>
         <br>
         <mat-form-field>
-          <input matInput [matDatepicker]="picker" placeholder="Choose a date"  [(ngModel)]="data.exp" id="p_exp">
+          <input matInput [matDatepicker]="picker" placeholder="Choose a date"  [(ngModel)]="data.exp" i>
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>

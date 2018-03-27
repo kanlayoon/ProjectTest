@@ -76,8 +76,8 @@ export class HeaderComponent implements OnInit {
        
         
 
-        console.log("header");
-        console.log(result);
+        // console.log("header");
+        // console.log(result);
         this.products = result;
         for (let product of this.products){
           if(product.BranchProduct_Amount <= product.Notifications_Amount3){
@@ -119,8 +119,8 @@ export class HeaderComponent implements OnInit {
           this.dateNoti1 = dateNoti1;
           this.dateNoti2 = dateNoti2;
           this.dateNoti3 = dateNoti3;
-          console.log("date"+ this.date);
-          console.log("datenoti"+ this.dateNoti1);
+          // console.log("date"+ this.date);
+          // console.log("datenoti"+ this.dateNoti1);
           if(this.dateNoti1 ===  this.date){
             console.log("ใกล้หมดอายุ ระดับ1");   
             this.push_noti.push(product);
@@ -143,9 +143,9 @@ export class HeaderComponent implements OnInit {
             this.notifications = 1;
          }
         
-        console.log("count" + this.Number_count);
-        console.log(this.push_noti);
-        console.log(this.push_status);
+        // console.log("count" + this.Number_count);
+        // console.log(this.push_noti);
+        // console.log(this.push_status);
         
       },
         error => console.log(error));

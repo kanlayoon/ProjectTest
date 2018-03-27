@@ -15,8 +15,8 @@ export class ProductService {
     this.actionUrl = apiUrl.ApiServer;
   }
 
-  public getAll = (): Observable<any[]> =>  {
-    return this._http.get(this.actionUrl + "/BranchProduct/id2/1")
+  public getAll = (bid): Observable<any[]> =>  {
+    return this._http.get(this.actionUrl + "/BranchProduct/id2/"+bid)
     .map( (response: Response) => <any>response.json() )
     .do( x => console.log(x));
   }

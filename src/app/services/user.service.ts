@@ -60,7 +60,7 @@ import { Injectable } from '@angular/core';
 // import { HttpClient } from '@angular/common/http';
 import { Headers, Http, RequestOptions, Response } from '@angular/http';
 
-import { User } from '../models/user';
+import { User } from '../login/_models/user';
 
 // @Injectable()
 // export class UserService {

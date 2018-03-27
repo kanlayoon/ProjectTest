@@ -15,15 +15,6 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <mat-form-field>
-          <mat-select placeholder="หมวดการค้นหา">
-            <mat-option *ngFor="let category of Catproduct" [value]="category.value">
-              {{ category.viewValue }}
-            </mat-option>
-          </mat-select>
-          </mat-form-field>
           &nbsp;&nbsp;&nbsp;&nbsp;
     <!-- <div class="example-header"> -->
     <mat-form-field>
@@ -40,7 +31,7 @@
             <mat-datepicker #picker2></mat-datepicker>
           </mat-form-field> -->
 
-      <mat-table [dataSource]="dataSource" matSort>
+      <mat-table [dataSource]="dataSource1" matSort>
 
         <!-- ID Column -->
         <ng-container matColumnDef="Product_Id">
@@ -64,7 +55,7 @@
 
         <!-- Color Column -->
         <ng-container matColumnDef="BranchProduct_EXP">
-          <mat-header-cell *matHeaderCellDef mat-sort-header   > วันหมดอายุ </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef mat-sort-header   > วันหมดอายุ(วว/ดด/ปปปป) </mat-header-cell>
           <mat-cell *matCellDef="let product"  > {{product.BranchProduct_EXP | date:'dd/MM/yyyy' }} </mat-cell>
         </ng-container>
 
@@ -108,4 +99,6 @@
 
       
   </mat-card>
+
+  
 </body>

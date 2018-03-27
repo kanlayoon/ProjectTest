@@ -4,20 +4,10 @@
   <mat-card>
     <h1>สินค้า</h1>
     <a [routerLink]="'/type-product'" ><button mat-raised-button color="primary">จัดการประเภทสินค้า</button></a>
-    <!-- <a [routerLink]="'/add-product'" ><button mat-raised-button color="primary">เพิ่มสินค้า</button></a> <br><br><br> -->
+    <a [routerLink]="'/add-product'" ><button mat-raised-button color="primary">เพิ่มสต๊อกสินค้า</button></a> 
    <button mat-raised-button color="primary"  (click)="openDialogAdd()">เพิ่มสินค้า</button> <br><br><br>
    
-
-
-    <mat-form-field>
-        <mat-select placeholder="หมวดการค้นหา">
-          <mat-option *ngFor="let category of Catproduct" [value]="category.value">
-            {{ category.viewValue }}
-          </mat-option>
-        </mat-select>
-
-        </mat-form-field>
-        &nbsp;&nbsp;&nbsp;&nbsp;
+ 
     <!-- <div class="example-header"> -->
     <mat-form-field>
       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="ค้นหา">
@@ -26,7 +16,7 @@
     <i class="material-icons col-3">search</i>
     <div class="example-container mat-elevation-z8">
 
-      <mat-table [dataSource]="dataSource" matSort>
+      <mat-table [dataSource]="dataSource1" matSort>
 
         <!-- ID Column -->
         
@@ -73,8 +63,9 @@
         <ng-container matColumnDef="sss">
             <mat-header-cell style="flex: 0 0 15%;" *matHeaderCellDef mat-sort-header>  </mat-header-cell>
             <mat-cell style="flex: 0 0 15%;" *matCellDef="let product">  
-              <button class="ui inverted red button"  data-toggle="modal" data-target="#myModal" (click)="addIdDel(product.Product_Code)">ลบ</button> 
-              &nbsp; <button class="ui inverted orange button"  (click)="openDialog(product.Product_Code,product.Product_Name,product.BranchProduct_EXP,product.Product_Des
+              <button class="ui inverted red button"  data-toggle="modal" data-target="#myModalDEL" (click)="addIdDel(product.Product_Code)">ลบ</button> 
+              &nbsp; 
+              <button class="ui inverted orange button"  (click)="openDialog(product.Product_Code,product.Product_Name,product.BranchProduct_EXP,product.Product_Des
               ,product.Product_Instruction,product.BranchProduct_Amount,product.ProductType_Name)">แก้ไข</button> </mat-cell>
           </ng-container> 
         
@@ -89,34 +80,10 @@
 
   </mat-card>
 
-
-   <!-- The Modal -->
-   <!-- <div class="modal fade" id="myModal" >
-    <div class="modal-dialog">
-      <div class="modal-content">
-      
-        <div class="modal-header">
-          <h4 class="modal-title">ลบสินค้า</h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-    
-        <div class="modal-body">
-          คุณต้องการลบสินค้าออกจากคลัง
-        </div>
-        
-        <div class="modal-footer">
-           <button type="button" class="btn btn-success"  (click)="delProduct()">ตกลง</button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
-        </div>
-        
-      </div>
-    </div>
-  </div> -->
-
   <div class="container">
     <!-- Trigger the modal with a button -->
     <!-- Modal -->
-    <div class="modal fade in" id="myModal" role="dialog">
+    <div class="modal fade in" id="myModalDEL" role="dialog">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
                 <div class="modal-header">

@@ -15,11 +15,15 @@ import { notificationService } from '../notification/notification.service';
   styleUrls: ['./notification.component.css']
 })
 export class NotificationComponent implements OnInit {
+  dataSource1: MatTableDataSource<any>;
   Code:any;
   Bid:any;
   Amount1:any;
   Amount2:any;
   Amount3:any;
+
+  
+  
 
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -30,17 +34,29 @@ export class NotificationComponent implements OnInit {
   displayedColumns2 = ['id', 'name', 'notiExp1', 'notiExp2','notiExp3','button'];
   // dataSource: MatTableDataSource<UserData>;
   dataSource = new ProductDataSource(this.notificationService);
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+ 
   public products: any[];
+  
   ngOnInit() {
+    
+
     this.notificationService.getAll().subscribe(data => {
       this.products = data;
-      console.log(data)
+      this.dataSource1 = new MatTableDataSource(this.products);
+     
+      // console.log(data);
     },
       error => console.log(error));
   }
- 
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    filterValue = filterValue.toUpperCase();
+    filterValue = filterValue.toString();
+    this.dataSource1.filter = filterValue;
+    console.log("filterrrrrrrrrrrrrrrr");
+    console.log(filterValue);
+  }
   
   setting_amount(code,noti1,noti2,noti3){
     console.log("1 " + noti1);
@@ -51,19 +67,22 @@ export class NotificationComponent implements OnInit {
     this.Amount2=noti2;
     this.Amount3=noti3;
     console.log("test"+ this.Amount2+ this.Amount3 + this.Amount1 + this.Code);
-    if(noti1!=undefined){
+    if(noti1!=undefined ){
       let obj1 = {
         bid :1,
         code:this.Code,
         amount1:this.Amount1
-        
       }
-     
-      this.notificationService. noti_amount1(obj1) .subscribe( 
+      this.notificationService.noti_amount1(obj1) .subscribe( 
         error => console.log(error),
        () => console.log("update complete"));
-       
+      
     }
+    else {
+      console.log("noti1มีค่ามากกกกกกกกกกกกกกกกกกก");
+      let check = 1;
+    }
+  
     if(noti2!=undefined){
       let obj2 = {
         bid :1,

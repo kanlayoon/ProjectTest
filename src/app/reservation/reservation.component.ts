@@ -18,6 +18,7 @@ export class State {
   styleUrls: ['./reservation.component.css']
 })
 export class ReservationComponent implements OnInit {
+  dataSource1: MatTableDataSource<any>;
   reservation : any[];
   constructor( private route: ActivatedRoute,
     private router: Router,
@@ -27,21 +28,21 @@ export class ReservationComponent implements OnInit {
   ngOnInit() {
     this.ReservationService.get_reservation().subscribe(data => {
       this.reservation = data;
-      console.log(data)
-      
+      console.log(data);
+      this.dataSource1 = new MatTableDataSource(this.reservation);
     },
       error => console.log(error));
   }
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
+    this.dataSource1.filter = filterValue;
+  }
+ 
 
   displayedColumns = ['courseName', 'date'];
   // dataSource: MatTableDataSource<UserData>;
   dataSource = new ProductDataSource(this.ReservationService);
-
-
-
-  
- 
-
 }
 export class ProductDataSource extends DataSource<any> {
   constructor(private ReservationService: ReservationService) {

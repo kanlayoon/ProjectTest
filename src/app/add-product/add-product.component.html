@@ -1,85 +1,22 @@
 <app-header></app-header>
 
-<h1 style="text-align:center">เพิ่มข้อมูลสินค้า</h1>
+<h1 style="text-align:center">เพิ่มจำนวนสินค้า</h1>
 
 <mat-card>
 
   <div class="example-container" style="text-align:center">
-    <mat-form-field>
-      <input matInput myNumberOnly name="min" placeholder="รหัสสินค้า" [formControl]="code" required [(ngModel)]="id">
-     
-    </mat-form-field>
-    <br>
-    <mat-form-field>
-      <input matInput placeholder="ชื่อสินค้า" [formControl]="namep" required [(ngModel)]="name">
-      <!-- <input matInput placeholder="ชื่อสินค้า"> -->
-    </mat-form-field>
-    <br>
-
-    <mat-select placeholder=" ประเภทสินค้า" [(ngModel)]="typeproduct" name="typeproduct">
-      <mat-option *ngFor="let type of productTypes" [value]="type">
-        {{ type.ProductType_Name }}
-      </mat-option>
-    </mat-select>
-
-    <p style="text-align:left;"> ประเภทของสินค้า</p>
-    <mat-card>
-    
-      <button mat-raised-button color="primary" data-toggle="modal" data-target="#myModal">เพิ่มประเภทสินค้า</button>
-      <br>
-      <mat-form-field>
-        <mat-select placeholder="ประเภทสินค้า" [(ngModel)]="typeproduct" name="typeproduct">
-          <mat-option *ngFor="let type of productTypes" [value]="type">{{ type.ProductType_Name }}</mat-option>
+      <mat-select placeholder="รหัสสินค้า" [(ngModel)]="ProductCode" name="ProductCode">
+          <mat-option *ngFor="let product of products" [value]="product" (click)="Show(product)">
+            {{ product.Product_Code }}
+          </mat-option>
         </mat-select>
-      </mat-form-field>
-    </mat-card>
-    <br>
-
-    <mat-form-field>
-      <input matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="date"  >
-      <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-
-
-    <br>
-    <mat-form-field>
-      <textarea matInput placeholder="คำอธิบาย" [(ngModel)]="des"></textarea>
-    </mat-form-field>
-    <br>
-    <mat-form-field>
-      <textarea matInput placeholder="วิธีใช้" [(ngModel)]="ins"></textarea>
-    </mat-form-field>
-    <br>
-    <mat-form-field>
-      <input matInput myNumberOnly name="min" placeholder="จำนวน" [(ngModel)]="amount">
-    </mat-form-field>
-  </div>
-  <br>
-  <button mat-raised-button color="primary" (click)="sp_insert_Product()">เพิ่มสินค้า</button>
+        </div>
+        <div *ngIf="show">
+          <div class="container">
+             fkgfdlgkdfg;kdf;
+          </div>
+        </div>
+  <button mat-raised-button color="primary" >เพิ่มสินค้า</button>
 </mat-card>
 
 
-<div class="container">
-  <!-- Trigger the modal with a button -->
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog modal-sm">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">เพิ่มประเภทสินค้า</h4>
-        </div>
-        <div class="modal-body">
-          <mat-form-field>
-            <input matInput placeholder="ประเภทสินค้า" [(ngModel)]="addtype">
-          </mat-form-field>
-          <button mat-raised-button color="primary" (click)="save()">เพิ่ม</button>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>

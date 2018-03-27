@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { Console } from '@angular/core/src/console';
@@ -28,7 +28,7 @@ export class TypeProductComponent implements OnInit {
   name: string;
   data: any;
   warnAdd: any;
-  constructor(
+  constructor(private zone: NgZone,
     private route: ActivatedRoute,
     private router: Router,
     private typeProductService: typeProductService, private _http: Http, public dialog: MatDialog) { }
@@ -44,10 +44,10 @@ export class TypeProductComponent implements OnInit {
     console.log(this.data);
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed' + result);
-      if( result != undefined ){
-        this.update(id,result);
+      if (result != undefined) {
+        this.update(id, result);
       }
-      
+
 
     });
   }
@@ -82,10 +82,12 @@ export class TypeProductComponent implements OnInit {
 
 
   ngOnInit() {
-    this.typeProductService.getAll().subscribe(data => this.productTypes = data,
-      error => console.log(error),
-      //  console.log("eieiza: " + this.productTypes);
-      () => console.log("Get all product complete"));
+
+    this.typeProductService.getAll().subscribe(data => {
+      this.zone.run((() => {
+        this.productTypes = data;
+      }))
+    });
 
 
   }
@@ -142,7 +144,7 @@ export class ModalTypeProductDialog {
   onNoClick(): void {
     this.dialogRef.close();
   }
- 
+
 }
 @Component({
   selector: 'dialog-overview-example-dialog',

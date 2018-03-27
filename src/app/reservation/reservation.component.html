@@ -3,40 +3,24 @@
 <body>
   <mat-card>
     <h1>การจองคอร์ส</h1>
-  
-      <mat-form-field>
-        <mat-select placeholder="Favorite food">
-          <mat-option *ngFor="let food of foods" [value]="food.value">
-            {{ food.viewValue }}
-          </mat-option>
-        </mat-select>
-     
-          
-        </mat-form-field>
-        
-    
-
-&nbsp;&nbsp;&nbsp;&nbsp;
-
     <!-- <div class="example-header"> -->
     <mat-form-field>
-      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="ค้นหา">
     </mat-form-field>
     <!-- </div> -->
     <i class="material-icons col-3">search</i>
     <div class="example-container mat-elevation-z8">
-
-      <mat-table [dataSource]="dataSource" matSort>
+      <mat-table [dataSource]="dataSource1" matSort>
 
         <ng-container matColumnDef="courseName"> 
-          <mat-header-cell  *matHeaderCellDef mat-sort-header > คอร์ส </mat-header-cell>
+          <mat-header-cell  *matHeaderCellDef mat-sort-header > ชื่อคอร์ส </mat-header-cell>
           <mat-cell  *matCellDef="let reservation"> {{reservation.Course_Name}} </mat-cell>
         </ng-container>
 
         <!-- Progress Column -->
         <ng-container matColumnDef="date">
           <mat-header-cell  *matHeaderCellDef mat-sort-header > วันที่จองคอร์ส </mat-header-cell>
-          <mat-cell  *matCellDef="let reservation"> {{reservation.ReservationCourse_Date}} </mat-cell>
+          <mat-cell  *matCellDef="let reservation"> {{reservation.ReservationCourse_Date | date: 'dd/MM/yyyy' }} </mat-cell>
         </ng-container>
 
         <!-- Name Column -->

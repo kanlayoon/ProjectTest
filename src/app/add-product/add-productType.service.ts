@@ -13,7 +13,11 @@ export class AddProductTypeService {
   constructor(private _http: Http, private apiUrl: ApiUrl) {
     this.actionUrl = apiUrl.ApiServer;
   }
-  
+  public getAllproduct = (): Observable<any[]> =>  {
+    return this._http.get(this.actionUrl + "/BranchProduct/id2/1")
+    .map( (response: Response) => <any>response.json() )
+    .do( x => console.log(x));
+  }
   public addType = (addProductType): Observable<any> => {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: headers });
@@ -32,9 +36,6 @@ public sp_insert_Product = (insert_p, obj:any): Observable<any> => {
 
 
 }
-
-
-
 export class UpdateService {
   private actionUrl: string;
 constructor(private _http: Http, private apiUrl: ApiUrl) {

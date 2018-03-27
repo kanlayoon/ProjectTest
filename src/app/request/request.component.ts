@@ -22,6 +22,7 @@ export class State {
   styleUrls: ['./request.component.css']
 })
 export class RequestComponent implements OnInit {
+  dataSource1: MatTableDataSource<any>;
   code : any;
   date:Date;
   amount :any;
@@ -36,31 +37,26 @@ export class RequestComponent implements OnInit {
     this.RequestService.getAll().subscribe(data => {
       this.products = data;
       console.log(data);
-   
+      this.dataSource1 = new MatTableDataSource(this.products);
     },
       error => console.log(error));
   }
 
   myControl: FormControl = new FormControl();
-  foods = [
-    { value: 'steak-0', viewValue: 'Steak' },
-    { value: 'pizza-1', viewValue: 'Pizza' },
-    { value: 'tacos-2', viewValue: 'Tacos' }
-  ];
 
-  options = [
-    'One',
-    'Two',
-    'Three'
-  ];
 
-  displayedColumns = ['Product_Id', 'Product_Name', 'ProductType_Name', 'BranchProduct_EXP', 'Product_Des', 'Product_Instruction', 'BranchProduct_Amount', 'input_num', 'button'];
+  displayedColumns = ['Product_Id', 'Product_Name', 'ProductType_Name', 'Product_Des', 'Product_Instruction', 'BranchProduct_Amount', 'input_num', 'button'];
 
   dataSource = new ProductDataSource(this.RequestService);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
+    this.dataSource1.filter = filterValue;
+  }
  
 
 request(pCode,amount): void{
@@ -80,10 +76,7 @@ console.log("obj" + obj)
     }, error => console.log(error));
 
 }
- 
 }
-
-
 export class ProductDataSource extends DataSource<any> {
   constructor(private supplyService: RequestService) {
     super();

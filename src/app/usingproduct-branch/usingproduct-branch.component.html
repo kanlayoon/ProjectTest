@@ -14,21 +14,37 @@
 
                     <mat-form-field class="selectCP">
                         <mat-select placeholder="คอร์ส" [(ngModel)]="courseSelected" name="course">
-                            <mat-option *ngFor="let Course of course" [value]="Course">
+                            <mat-option *ngFor="let Course of course" [value]="Course" (click)="showProduct(Course.Course_Id)">
                                 {{ Course.Course_Name }}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
-                    &nbsp;&nbsp;&nbsp;
+                    <!-- &nbsp;&nbsp;&nbsp;
                     <mat-form-field class="selectCP">
                         <mat-select placeholder=" ชื่อสินค้า">
                             <mat-option *ngFor="let food of foods" [value]="food.value">
                                 {{ food.viewValue }}
                             </mat-option>
                         </mat-select>
-
-
-                    </mat-form-field>
+                    </mat-form-field> -->
+                    <!-- <div *ngIf="courseSelected==='Course'">
+                        <div class="container">
+                            sup
+                        </div>
+                      </div>
+                      <div *ngIf="courseSelected==='2'">
+                        <div class="container">
+                            use
+                        </div>
+                      </div>
+              
+                      <div *ngIf="courseSelected==='3'">
+                        <div class="container">
+                            req
+                        </div>
+                      </div> -->
+              
+                  <div *ngIf="showTable">
                     <div class="example-header">
                         <mat-form-field>
                             <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
@@ -37,32 +53,33 @@
 
                     <div class="example-container mat-elevation-z8">
 
-                        <mat-table [dataSource]="dataSource" matSort>
+                        <mat-table [dataSource]="dataSource1" matSort>
 
                             <ng-container matColumnDef="Product_Code">
+                               
                                 <mat-header-cell *matHeaderCellDef mat-sort-header> รหัสสินค้า </mat-header-cell>
-                                <mat-cell *matCellDef="let product"> {{product.Product_Code}} </mat-cell>
+                                <mat-cell *matCellDef="let courseproduct; let in=index" name="code" [attr.id]="'code' + i" > {{courseproduct.Product_Code}} </mat-cell>
                               </ng-container>
                       
                               <!-- Name Column -->
                               <ng-container matColumnDef="Product_Name">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header> ชื่อสินค้า </mat-header-cell>
-                                <mat-cell *matCellDef="let product"> {{product.Product_Name}} </mat-cell>
+                                <mat-cell *matCellDef="let courseproduct; let in=index" name="'name' + i "  > {{courseproduct.Product_Name}} </mat-cell>
                               </ng-container>
 
                               <ng-container matColumnDef="amount">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header > จำนวน </mat-header-cell>
-                                <mat-cell *matCellDef="let product">
+                                <mat-cell *matCellDef="let courseproduct; let i = index">
                                   <div class="ui input" style="width:70%">
-                                    <input type="text" placeholder="จำนวน" [(ngModel)]="product.amount" name="input_name">
+                                    <input type="text" placeholder="จำนวน"  myNumberOnly name="min" name="input_name" [attr.id]="'inputAmount' + i">
                                   </div>
                                 </mat-cell>
                               </ng-container>
 
-                              <ng-container matColumnDef="button">
+                              <!-- <ng-container matColumnDef="button">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header>  </mat-header-cell>
-                                <mat-cell *matCellDef="let product">  <button class="ui inverted violet  button"  (click)="useProduct(courseSelected,product.Product_Code,product.amount)">ใช้สินค้า</button> </mat-cell>
-                              </ng-container>
+                                <mat-cell *matCellDef="let courseproduct">   </mat-cell>
+                              </ng-container> -->
 
                             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                             <mat-row *matRowDef="let row; columns: displayedColumns;">
@@ -71,8 +88,9 @@
 
                         <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
                     </div>
-                    
-
+                </div>
+                <br>
+                <button class="ui inverted violet  button"  (click)="useProduct()">ใช้สินค้า</button>
                 </mat-card>
           
          

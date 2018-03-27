@@ -3,19 +3,6 @@
 <body>
   <mat-card>
     <h1>ขอเบิกสินค้า</h1>
- 
-      <mat-form-field>
-        <mat-select placeholder="Favorite food">
-          <mat-option *ngFor="let food of foods" [value]="food.value">
-            {{ food.viewValue }}
-          </mat-option>
-        </mat-select>
-        </mat-form-field>
-        
-     
-&nbsp;&nbsp;&nbsp;&nbsp;
-
-
     <!-- <div class="example-header"> -->
     <mat-form-field>
       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
@@ -24,15 +11,13 @@
     <i class="material-icons col-3">search</i>
     <div class="example-container mat-elevation-z8">
 
-      <mat-table [dataSource]="dataSource" matSort>
+      <mat-table [dataSource]="dataSource1" matSort>
 
        <!-- ID Column -->
        <ng-container matColumnDef="Product_Id">
         <mat-header-cell *matHeaderCellDef mat-sort-header> รหัสสินค้า </mat-header-cell>
         <mat-cell *matCellDef="let product"> {{product.Product_Code}} </mat-cell>
       </ng-container>
-
-   
 
       <!-- Progress Column -->
       <ng-container matColumnDef="Product_Name">
@@ -44,12 +29,6 @@
       <ng-container matColumnDef="ProductType_Name">
         <mat-header-cell *matHeaderCellDef mat-sort-header> ประเภทสินค้า </mat-header-cell>
         <mat-cell *matCellDef="let product"> {{product.ProductType_Name}} </mat-cell>
-      </ng-container>
-
-      <!-- Color Column -->
-      <ng-container matColumnDef="BranchProduct_EXP">
-        <mat-header-cell *matHeaderCellDef mat-sort-header   > วันหมดอายุ </mat-header-cell>
-        <mat-cell *matCellDef="let product"  > {{product.BranchProduct_EXP | date:'dd/MM/yyyy' }} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="Product_Des">
@@ -70,7 +49,7 @@
       <ng-container matColumnDef="input_num">
         <mat-header-cell *matHeaderCellDef mat-sort-header > จำนวน </mat-header-cell>
         <mat-cell *matCellDef="let product"> <div class="ui input" style="width:70%">
-          <input type="text" placeholder="จำนวน" [(ngModel)]="product.amount" name="input_name">
+          <input myNumberOnly name="min" type="text" placeholder="จำนวน" [(ngModel)]="product.amount" name="input_name">
          
         </div> </mat-cell>
       </ng-container>
@@ -87,7 +66,5 @@
 
       <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
     </div>
-
-
   </mat-card>
 </body>

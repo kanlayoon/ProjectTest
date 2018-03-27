@@ -26,9 +26,10 @@ export class AddProductComponent implements OnInit {
   typeproduct :any;
   date :any;
   amount : any;
-  
- 
-  
+  public products :any[];
+  ProductCode :any;
+  show :any;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -40,12 +41,23 @@ export class AddProductComponent implements OnInit {
   }
   
   ngOnInit() {
-    this.updateService.getAll().subscribe( data => this.productTypes = data, 
+    this.AddProductTypeService.getAllproduct().subscribe( data => this.products = data, 
+      error => console.log(error),
+     () => console.log("Get all product complete"));
+     console.log("product: " + this.products);
+     
+
+     this.AddProductTypeService.getAllproduct().subscribe( data => this.products = data, 
       error => console.log(error),
      //  console.log("eieiza: " + this.productTypes);
      () => console.log("Get all product complete"));
+    
+     if(this.ProductCode!= undefined){
+      return this.show = 1;
   }
-
+  console.log("show"+this.show);
+  console.log("show"+this.ProductCode);
+  }
   code = new FormControl('', [Validators.required, Validators.email]);
 
   getErrorMessage() {
@@ -60,8 +72,9 @@ export class AddProductComponent implements OnInit {
         this.namep.hasError('email') ? 'Not a valid email' :
             '';
   }
-
-
+Show(productC){
+ console.log("code"+productC);
+}
   save(): void {
     // console.log("this is line 44: "+this.typeproduct.ProductType_Id);
      //this.addtype 
@@ -88,9 +101,9 @@ export class AddProductComponent implements OnInit {
           name: this.name,
           ins: this.ins,
           des: this.des,
-          type: this.types,
           date :this.date,
           amount:this.amount,
+          type: this.types,
           idb: 1
         }
         console.log(insert_p);
